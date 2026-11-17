@@ -1,13 +1,61 @@
-import { Composition, Folder } from "remotion";
+import { Composition, Folder, Still } from "remotion";
 import { HelloWorld } from "./HelloWorld";
 import { Logo } from "./HelloWorld/Logo";
 import { Title } from "./HelloWorld/Title";
+import { KenapaNgantuk } from "./KenapaNgantuk";
+import { BrandClosing, BRAND_CLOSING_SECONDS } from "./brand/BrandClosing";
+import { BrandClosingPixel, PIXEL_CLOSING_SECONDS } from "./brand/BrandClosingPixel";
+import { CharacterLineup } from "./brand/CharacterLineup";
+import { ChannelBanner, ChannelWatermark, ProfilePicture } from "./brand/ChannelArt";
+import { FPS, TOTAL_SECONDS } from "./KenapaNgantuk/script";
 
 // Each <Composition> is an entry in the sidebar!
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      <Composition
+        id="KenapaNgantuk"
+        component={KenapaNgantuk}
+        durationInFrames={Math.round(TOTAL_SECONDS * FPS)}
+        fps={FPS}
+        width={1080}
+        height={1920}
+      />
+      <Folder name="Brand">
+        <Composition
+          id="BrandClosing"
+          component={BrandClosing}
+          durationInFrames={BRAND_CLOSING_SECONDS * 60}
+          fps={60}
+          width={1080}
+          height={1920}
+          defaultProps={{}}
+        />
+        <Composition
+          id="BrandClosingPixel"
+          component={BrandClosingPixel}
+          durationInFrames={PIXEL_CLOSING_SECONDS * 60}
+          fps={60}
+          width={1080}
+          height={1920}
+          defaultProps={{}}
+        />
+        <Composition
+          id="CharacterLineup"
+          component={CharacterLineup}
+          durationInFrames={240}
+          fps={60}
+          width={1920}
+          height={1080}
+          defaultProps={{}}
+        />
+      </Folder>
+      <Folder name="YouTube">
+        <Still id="ChannelBanner" component={ChannelBanner} width={2560} height={1440} defaultProps={{ showGuides: false }} />
+        <Still id="ProfilePicture" component={ProfilePicture} width={800} height={800} />
+        <Still id="ChannelWatermark" component={ChannelWatermark} width={150} height={150} />
+      </Folder>
       <Folder name="Elements">
         <Composition
           id="Logo"

@@ -1,0 +1,16 @@
+{
+  "out": "public/vo/kenapa-ngantuk",
+  "module": "src/KenapaNgantuk/vo.generated.ts",
+  "clips": {
+    "hook": "habis makan, langsung ngantuk? tenang, ini bukan karena kamu malas.",
+    "promise": "ada lima alasan kenapa ini terjadi.",
+    "p1": "pertama, hormon. saat mencerna makanan, tubuh melepas serotonin dan melatonin, dua hormon yang bikin ngantuk.",
+    "p2": "kedua, aliran darah lebih banyak ke saluran cerna, jadi suplai ke otak sedikit berkurang. tapi teori ini masih diteliti, ya.",
+    "p3": "ketiga, kurang tidur. badan capek dan gampang lapar, akhirnya makan lebih banyak. usahakan tidur tujuh sampai sembilan jam.",
+    "p4": "keempat, jarang bergerak. tubuh jadi gampang lelah. coba jalan kaki lima belas menit setiap hari.",
+    "p5": "kelima, gangguan kesehatan, misalnya diabetes, anemia, hipotiroid, atau sleep apnea.",
+    "food": "makanan seperti telur, tahu, ikan, pisang, ceri, teh chamomile, sampai minuman berenergi juga bisa bikin makin ngantuk.",
+    "outro": "jadi, ngantuk habis makan itu normal. tapi kalau sering dan berat, cek ke dokter, ya.",
+    "closing": "follow day one eight untuk info lainnya."
+  }
+}
