@@ -1,0 +1,70 @@
+// DIBUAT OTOMATIS oleh scripts/match_voiceover.mjs — jangan diedit manual.
+import type { VoClip } from "../brand/voiceover";
+
+export const VO: Partial<Record<string, VoClip>> = {
+  "hook": {
+    file: "vo/kopi-ngantuk/hook.wav",
+    duration: 3.88,
+    words: [{"word":"review","start":0.12,"end":0.422},{"word":"jujur","start":0.422,"end":0.847},{"word":"americano.","start":0.847,"end":1.773},{"word":"sruput","start":1.773,"end":2.235},{"word":"dulu...","start":2.235,"end":2.5},{"word":"lho,","start":2.5,"end":2.764},{"word":"kok","start":2.764,"end":2.83},{"word":"malah","start":2.83,"end":3.161},{"word":"ngantuk?","start":3.161,"end":3.88}],
+  },
+  "rating": {
+    file: "vo/kopi-ngantuk/rating.wav",
+    duration: 3.89,
+    words: [{"word":"rating","start":0.12,"end":0.815},{"word":"melek:","start":0.815,"end":1.296},{"word":"satu","start":1.296,"end":1.747},{"word":"dari","start":1.747,"end":2.099},{"word":"lima.","start":2.099,"end":2.715},{"word":"maaf","start":2.715,"end":3.095},{"word":"ya,","start":3.095,"end":3.289},{"word":"kopi.","start":3.289,"end":3.89}],
+  },
+  "promise": {
+    file: "vo/kopi-ngantuk/promise.wav",
+    duration: 3.94,
+    words: [{"word":"eits,","start":0.06,"end":0.12},{"word":"ternyata","start":0.12,"end":0.757},{"word":"bukan","start":0.757,"end":1.245},{"word":"salah","start":1.245,"end":1.537},{"word":"kopinya","start":1.537,"end":2.119},{"word":"doang.","start":2.119,"end":2.804},{"word":"ada","start":2.804,"end":2.914},{"word":"lima","start":2.914,"end":3.236},{"word":"alasan.","start":3.236,"end":3.94}],
+  },
+  "p1": {
+    file: "vo/kopi-ngantuk/p1.wav",
+    duration: 7.59,
+    words: [{"word":"pertama,","start":0.12,"end":1.252},{"word":"adenosin","start":1.252,"end":2.086},{"word":"numpuk.","start":2.086,"end":2.945},{"word":"kafein","start":2.945,"end":3.292},{"word":"cuma","start":3.292,"end":3.565},{"word":"nahan","start":3.565,"end":3.895},{"word":"sinyal","start":3.895,"end":4.292},{"word":"ngantuk.","start":4.292,"end":4.821},{"word":"pas","start":4.821,"end":5.093},{"word":"efeknya","start":5.093,"end":5.424},{"word":"habis,","start":5.424,"end":5.853},{"word":"ngantuknya","start":5.853,"end":6.465},{"word":"datang","start":6.465,"end":6.828},{"word":"borongan.","start":6.828,"end":7.59}],
+  },
+  "p2": {
+    file: "vo/kopi-ngantuk/p2.wav",
+    duration: 4.15,
+    words: [{"word":"kedua,","start":0.12,"end":0.873},{"word":"kurang","start":0.873,"end":1.454},{"word":"tidur.","start":1.454,"end":2.31},{"word":"kopi","start":2.31,"end":2.396},{"word":"itu","start":2.396,"end":2.6},{"word":"bukan","start":2.6,"end":2.985},{"word":"pengganti","start":2.985,"end":3.581},{"word":"tidur.","start":3.581,"end":4.15}],
+  },
+  "siklus": {
+    file: "vo/kopi-ngantuk/siklus.wav",
+    duration: 6.01,
+    words: [{"word":"apalagi","start":0.12,"end":0.446},{"word":"kalau","start":0.446,"end":0.772},{"word":"ngopi","start":0.772,"end":1.132},{"word":"sore.","start":1.132,"end":1.569},{"word":"tidur","start":1.569,"end":1.939},{"word":"jadi","start":1.939,"end":2.26},{"word":"jelek,","start":2.26,"end":2.727},{"word":"besoknya","start":2.727,"end":3.301},{"word":"ngantuk,","start":3.301,"end":4.02},{"word":"ngopi","start":4.02,"end":4.312},{"word":"lagi.","start":4.312,"end":4.974},{"word":"muter","start":4.974,"end":5.353},{"word":"terus.","start":5.353,"end":6.01}],
+  },
+  "p3": {
+    file: "vo/kopi-ngantuk/p3.wav",
+    duration: 4.81,
+    words: [{"word":"ketiga,","start":0.12,"end":1.004},{"word":"udah","start":1.004,"end":1.504},{"word":"kebal.","start":1.504,"end":2.25},{"word":"yang","start":2.25,"end":2.465},{"word":"rutin","start":2.465,"end":2.826},{"word":"ngopi,","start":2.826,"end":3.218},{"word":"efek","start":3.218,"end":3.326},{"word":"kafeinnya","start":3.326,"end":3.81},{"word":"bisa","start":3.81,"end":4.026},{"word":"makin","start":4.026,"end":4.295},{"word":"lemah.","start":4.295,"end":4.81}],
+  },
+  "p4": {
+    file: "vo/kopi-ngantuk/p4.wav",
+    duration: 7.59,
+    words: [{"word":"keempat,","start":0.12,"end":1.34},{"word":"gula.","start":1.34,"end":2.201},{"word":"kopi","start":2.201,"end":2.312},{"word":"manis","start":2.312,"end":2.535},{"word":"bisa","start":2.535,"end":2.751},{"word":"bikin","start":2.751,"end":3.014},{"word":"gula","start":3.014,"end":3.221},{"word":"darah","start":3.221,"end":3.484},{"word":"naik","start":3.484,"end":3.795},{"word":"turun.","start":3.795,"end":4.167},{"word":"americano","start":4.167,"end":4.539},{"word":"mah","start":4.539,"end":4.911},{"word":"aman,","start":4.911,"end":5.293},{"word":"kecuali","start":5.293,"end":5.74},{"word":"kamu","start":5.74,"end":6.043},{"word":"tambah","start":6.043,"end":6.306},{"word":"tiga","start":6.306,"end":6.569},{"word":"sachet.","start":6.569,"end":7.59}],
+  },
+  "p5": {
+    file: "vo/kopi-ngantuk/p5.wav",
+    duration: 3.63,
+    words: [{"word":"kelima,","start":0.12,"end":0.757},{"word":"gen.","start":0.757,"end":1.254},{"word":"tiap","start":1.254,"end":1.469},{"word":"orang","start":1.469,"end":1.941},{"word":"beda","start":1.941,"end":2.18},{"word":"cara","start":2.18,"end":2.503},{"word":"ngolah","start":2.503,"end":2.9},{"word":"kafein.","start":2.9,"end":3.63}],
+  },
+  "tips": {
+    file: "vo/kopi-ngantuk/tips.wav",
+    duration: 8.1,
+    words: [{"word":"biar","start":0.12,"end":0.412},{"word":"nggak","start":0.412,"end":0.703},{"word":"zonk:","start":0.703,"end":1.199},{"word":"efek","start":1.199,"end":1.53},{"word":"kopi","start":1.53,"end":1.861},{"word":"bisa","start":1.861,"end":2.23},{"word":"lima","start":2.23,"end":2.532},{"word":"sampai","start":2.532,"end":3.047},{"word":"enam","start":3.047,"end":3.378},{"word":"jam.","start":3.378,"end":4.088},{"word":"jadi","start":4.088,"end":4.292},{"word":"ngopi","start":4.292,"end":4.632},{"word":"pagi,","start":4.632,"end":5.051},{"word":"maksimal","start":5.051,"end":5.595},{"word":"empat","start":5.595,"end":5.936},{"word":"cangkir","start":5.936,"end":6.412},{"word":"sehari,","start":6.412,"end":6.928},{"word":"dan","start":6.928,"end":7.112},{"word":"stop","start":7.112,"end":7.316},{"word":"di","start":7.316,"end":7.423},{"word":"sore","start":7.423,"end":7.647},{"word":"hari.","start":7.647,"end":8.1}],
+  },
+  "serius": {
+    file: "vo/kopi-ngantuk/serius.wav",
+    duration: 5.52,
+    words: [{"word":"tapi","start":0.12,"end":0.39},{"word":"kalau","start":0.39,"end":0.66},{"word":"ngantuk","start":0.66,"end":1.157},{"word":"terus","start":1.157,"end":1.457},{"word":"sampai","start":1.457,"end":1.858},{"word":"ganggu","start":1.858,"end":2.26},{"word":"aktivitas,","start":2.26,"end":3.107},{"word":"cek","start":3.107,"end":3.26},{"word":"ke","start":3.26,"end":3.509},{"word":"dokter.","start":3.509,"end":3.91},{"word":"dan","start":3.91,"end":4.035},{"word":"jangan","start":4.035,"end":4.4},{"word":"nyetir","start":4.4,"end":4.714},{"word":"pas","start":4.714,"end":4.889},{"word":"ngantuk.","start":4.889,"end":5.52}],
+  },
+  "ulang": {
+    file: "vo/kopi-ngantuk/ulang.wav",
+    duration: 3.61,
+    words: [{"word":"rating","start":0.12,"end":0.659},{"word":"ulang:","start":0.659,"end":0.996},{"word":"empat","start":0.996,"end":1.334},{"word":"dari","start":1.334,"end":1.603},{"word":"lima.","start":1.603,"end":2.143},{"word":"asal","start":2.143,"end":2.277},{"word":"tidurnya","start":2.277,"end":2.85},{"word":"cukup.","start":2.85,"end":3.61}],
+  },
+  "komen": {
+    file: "vo/kopi-ngantuk/komen.wav",
+    duration: 4.58,
+    words: [{"word":"kamu","start":0.12,"end":0.478},{"word":"tim","start":0.478,"end":0.588},{"word":"americano,","start":0.588,"end":1.203},{"word":"atau","start":1.203,"end":1.479},{"word":"tim","start":1.479,"end":1.672},{"word":"kopi","start":1.672,"end":1.965},{"word":"susu","start":1.965,"end":2.278},{"word":"gula","start":2.278,"end":2.48},{"word":"aren?","start":2.48,"end":2.893},{"word":"tulis","start":2.893,"end":3.232},{"word":"di","start":3.232,"end":3.646},{"word":"komen.","start":3.646,"end":4.58}],
+  },
+};

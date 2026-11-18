@@ -1,0 +1,60 @@
+// DIBUAT OTOMATIS oleh scripts/match_voiceover.mjs — jangan diedit manual.
+import type { VoClip } from "../brand/voiceover";
+
+export const VO: Partial<Record<string, VoClip>> = {
+  "hook": {
+    file: "vo/masuk-angin/hook.wav",
+    duration: 3.97,
+    words: [{"word":"kenapa","start":0.09,"end":0.35},{"word":"bisa","start":0.35,"end":0.64},{"word":"masuk","start":0.64,"end":1.04},{"word":"angin?","start":1.04,"end":1.82},{"word":"padahal","start":1.82,"end":2.18},{"word":"jendela","start":2.18,"end":2.67},{"word":"udah","start":2.67,"end":2.95},{"word":"ditutup","start":2.95,"end":3.44},{"word":"rapat.","start":3.44,"end":3.97}],
+  },
+  "promise": {
+    file: "vo/masuk-angin/promise.wav",
+    duration: 5.08,
+    words: [{"word":"tenang,","start":0,"end":0.31},{"word":"ternyata","start":0.31,"end":1.11},{"word":"bukan","start":1.11,"end":1.62},{"word":"angin","start":1.62,"end":2.12},{"word":"pelakunya.","start":2.12,"end":3.43},{"word":"ini","start":3.43,"end":3.45},{"word":"lima","start":3.45,"end":3.79},{"word":"tersangka","start":3.79,"end":4.56},{"word":"aslinya.","start":4.56,"end":5.08}],
+  },
+  "p1": {
+    file: "vo/masuk-angin/p1.wav",
+    duration: 5.89,
+    words: [{"word":"pertama,","start":0,"end":0.74},{"word":"flu","start":0.74,"end":1.06},{"word":"dan","start":1.06,"end":1.46},{"word":"infeksi","start":1.46,"end":2.22},{"word":"saluran","start":2.22,"end":2.97},{"word":"napas.","start":2.97,"end":3.41},{"word":"bikin","start":3.41,"end":3.73},{"word":"meriang,","start":3.73,"end":4.47},{"word":"pilek,","start":4.47,"end":5.04},{"word":"badan","start":5.04,"end":5.45},{"word":"pegal.","start":5.45,"end":5.89}],
+  },
+  "p2": {
+    file: "vo/masuk-angin/p2.wav",
+    duration: 5.58,
+    words: [{"word":"kedua,","start":0,"end":0.71},{"word":"perut","start":0.71,"end":1.23},{"word":"bermasalah.","start":1.23,"end":2.68},{"word":"kembung,","start":2.68,"end":3.15},{"word":"mual,","start":3.15,"end":3.57},{"word":"sendawa","start":3.57,"end":4.1},{"word":"terus,","start":4.1,"end":4.51},{"word":"bisa","start":4.51,"end":4.7},{"word":"karena","start":4.7,"end":5.11},{"word":"maag.","start":5.11,"end":5.58}],
+  },
+  "p3": {
+    file: "vo/masuk-angin/p3.wav",
+    duration: 4.72,
+    words: [{"word":"ketiga,","start":0,"end":0.84},{"word":"daya","start":0.84,"end":1.03},{"word":"tahan","start":1.03,"end":1.61},{"word":"tubuh","start":1.61,"end":2.05},{"word":"turun.","start":2.05,"end":2.8},{"word":"badan","start":2.8,"end":3.03},{"word":"jadi","start":3.03,"end":3.27},{"word":"gampang","start":3.27,"end":3.67},{"word":"kena","start":3.67,"end":4.07},{"word":"infeksi.","start":4.07,"end":4.72}],
+  },
+  "p4": {
+    file: "vo/masuk-angin/p4.wav",
+    duration: 4.59,
+    words: [{"word":"keempat,","start":0,"end":1.12},{"word":"kerokan.","start":1.12,"end":2.61},{"word":"coba","start":2.61,"end":2.74},{"word":"tebak,","start":2.74,"end":3.2},{"word":"merahnya","start":3.2,"end":3.73},{"word":"itu","start":3.73,"end":3.99},{"word":"apa?","start":3.99,"end":4.59}],
+  },
+  "jawab": {
+    file: "vo/masuk-angin/jawab.wav",
+    duration: 5.88,
+    words: [{"word":"jawabannya","start":0,"end":0.52},{"word":"B,","start":0.52,"end":0.83},{"word":"pembuluh","start":0.83,"end":1.52},{"word":"darah","start":1.52,"end":2.02},{"word":"kecil","start":2.02,"end":2.57},{"word":"yang","start":2.57,"end":2.93},{"word":"pecah.","start":2.93,"end":3.57},{"word":"bikin","start":3.57,"end":3.83},{"word":"lega,","start":3.83,"end":4.09},{"word":"tapi","start":4.09,"end":4.43},{"word":"bukan","start":4.43,"end":4.68},{"word":"menyembuhkan.","start":4.68,"end":5.88}],
+  },
+  "p5": {
+    file: "vo/masuk-angin/p5.wav",
+    duration: 6.54,
+    words: [{"word":"kelima,","start":0,"end":0.65},{"word":"angin","start":0.65,"end":1.23},{"word":"duduk.","start":1.23,"end":2.23},{"word":"nah,","start":2.23,"end":2.45},{"word":"yang","start":2.45,"end":2.94},{"word":"ini","start":2.94,"end":3.13},{"word":"serius.","start":3.13,"end":3.61},{"word":"nyeri","start":3.61,"end":4.09},{"word":"dada","start":4.09,"end":4.57},{"word":"bisa","start":4.57,"end":4.84},{"word":"tanda","start":4.84,"end":5.23},{"word":"masalah","start":5.23,"end":5.67},{"word":"jantung.","start":5.67,"end":6.54}],
+  },
+  "tips": {
+    file: "vo/masuk-angin/tips.wav",
+    duration: 3.81,
+    words: [{"word":"yang","start":0,"end":0},{"word":"aman:","start":0,"end":0.57},{"word":"minum","start":0.57,"end":0.85},{"word":"air","start":0.85,"end":1.13},{"word":"hangat","start":1.13,"end":1.7},{"word":"dan","start":1.7,"end":1.98},{"word":"istirahat","start":1.98,"end":2.94},{"word":"cukup.","start":2.94,"end":3.81}],
+  },
+  "dokter": {
+    file: "vo/masuk-angin/dokter.wav",
+    duration: 6.66,
+    words: [{"word":"tapi","start":0,"end":0},{"word":"kalau","start":0,"end":0.66},{"word":"demam","start":0.66,"end":0.89},{"word":"lebih","start":0.89,"end":1.4},{"word":"dari","start":1.4,"end":1.77},{"word":"tiga","start":1.77,"end":2.14},{"word":"hari,","start":2.14,"end":2.67},{"word":"muntah","start":2.67,"end":3.05},{"word":"atau","start":3.05,"end":3.37},{"word":"diare","start":3.37,"end":3.79},{"word":"terus,","start":3.79,"end":4.33},{"word":"atau","start":4.33,"end":4.71},{"word":"nyeri","start":4.71,"end":5.09},{"word":"dada,","start":5.09,"end":5.47},{"word":"langsung","start":5.47,"end":5.81},{"word":"ke","start":5.81,"end":5.93},{"word":"dokter.","start":5.93,"end":6.66}],
+  },
+  "komen": {
+    file: "vo/masuk-angin/komen.wav",
+    duration: 4.3,
+    words: [{"word":"eh,","start":0.12,"end":0.56},{"word":"kamu","start":0.56,"end":0.59},{"word":"tim","start":0.59,"end":0.86},{"word":"kerokan","start":0.86,"end":1.36},{"word":"atau","start":1.36,"end":1.65},{"word":"tim","start":1.65,"end":1.9},{"word":"minyak","start":1.9,"end":2.34},{"word":"angin?","start":2.34,"end":3.13},{"word":"tulis","start":3.13,"end":3.41},{"word":"di","start":3.41,"end":3.58},{"word":"komen","start":3.58,"end":4},{"word":"ya.","start":4,"end":4.3}],
+  },
+};

@@ -3,10 +3,16 @@ import { HelloWorld } from "./HelloWorld";
 import { Logo } from "./HelloWorld/Logo";
 import { Title } from "./HelloWorld/Title";
 import { KenapaNgantuk } from "./KenapaNgantuk";
+import { KopiNgantuk } from "./KopiNgantuk";
+import { FPS as KN_FPS, TOTAL_SECONDS as KN_TOTAL } from "./KopiNgantuk/script";
+import { MasukAngin } from "./MasukAngin";
+import { FPS as MA_FPS, TOTAL_SECONDS as MA_TOTAL } from "./MasukAngin/script";
 import { BrandClosing, BRAND_CLOSING_SECONDS } from "./brand/BrandClosing";
 import { BrandClosingPixel, PIXEL_CLOSING_SECONDS } from "./brand/BrandClosingPixel";
 import { CharacterLineup } from "./brand/CharacterLineup";
 import { ChannelBanner, ChannelWatermark, ProfilePicture } from "./brand/ChannelArt";
+import { FaceSheet } from "./brand/FaceSheet";
+import { WardrobeSheet } from "./brand/WardrobeSheet";
 import { FPS, TOTAL_SECONDS } from "./KenapaNgantuk/script";
 
 // Each <Composition> is an entry in the sidebar!
@@ -19,6 +25,22 @@ export const RemotionRoot: React.FC = () => {
         component={KenapaNgantuk}
         durationInFrames={Math.round(TOTAL_SECONDS * FPS)}
         fps={FPS}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="MasukAngin"
+        component={MasukAngin}
+        durationInFrames={Math.round(MA_TOTAL * MA_FPS)}
+        fps={MA_FPS}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="KopiNgantuk"
+        component={KopiNgantuk}
+        durationInFrames={Math.round(KN_TOTAL * KN_FPS)}
+        fps={KN_FPS}
         width={1080}
         height={1920}
       />
@@ -41,6 +63,8 @@ export const RemotionRoot: React.FC = () => {
           height={1920}
           defaultProps={{}}
         />
+        <Still id="FaceSheet" component={FaceSheet} width={1600} height={900} />
+        <Still id="WardrobeSheet" component={WardrobeSheet} width={2400} height={1800} />
         <Composition
           id="CharacterLineup"
           component={CharacterLineup}

@@ -1,0 +1,19 @@
+{
+  "out": "public/vo/kopi-ngantuk",
+  "module": "src/KopiNgantuk/vo.generated.ts",
+  "clips": {
+    "hook": "review jujur americano. sruput dulu... lho, kok malah ngantuk?",
+    "rating": "rating melek: satu dari lima. maaf ya, kopi.",
+    "promise": "eits, ternyata bukan salah kopinya doang. ada lima alasan.",
+    "p1": "pertama, adenosin numpuk. kafein cuma nahan sinyal ngantuk. pas efeknya habis, ngantuknya datang borongan.",
+    "p2": "kedua, kurang tidur. kopi itu bukan pengganti tidur.",
+    "siklus": "apalagi kalau ngopi sore. tidur jadi jelek, besoknya ngantuk, ngopi lagi. muter terus.",
+    "p3": "ketiga, udah kebal. yang rutin ngopi, efek kafeinnya bisa makin lemah.",
+    "p4": "keempat, gula. kopi manis bisa bikin gula darah naik turun. americano mah aman, kecuali kamu tambah tiga sachet.",
+    "p5": "kelima, gen. tiap orang beda cara ngolah kafein.",
+    "tips": "biar nggak zonk: efek kopi bisa lima sampai enam jam. jadi ngopi pagi, maksimal empat cangkir sehari, dan stop di sore hari.",
+    "serius": "tapi kalau ngantuk terus sampai ganggu aktivitas, cek ke dokter. dan jangan nyetir pas ngantuk.",
+    "ulang": "rating ulang: empat dari lima. asal tidurnya cukup.",
+    "komen": "kamu tim americano, atau tim kopi susu gula aren? tulis di komen."
+  }
+}

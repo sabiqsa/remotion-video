@@ -12,7 +12,7 @@ import { VO_LEAD } from "../brand/voiceover";
 import { WordText } from "../brand/WordText";
 import { FoodTicker, PointCounter } from "./Overlay";
 import { Scene3D } from "./Scene3D";
-import { CLOSING_SECONDS, CLOSING_VO, CONTENT_SECONDS, SCENES, SOURCE } from "./script";
+import { CLOSING_SECONDS, CONTENT_SECONDS, SCENES, SOURCE } from "./script";
 import { VO } from "./vo.generated";
 
 const CANVAS_TOP = 600;
@@ -63,11 +63,6 @@ export const KenapaNgantuk: React.FC = () => {
           </Sequence>
         );
       })}
-      {CLOSING_VO ? (
-        <Sequence from={sec(CONTENT_SECONDS + 0.25, fps)} name="vo closing" layout="none">
-          <Audio src={staticFile(CLOSING_VO.file)} />
-        </Sequence>
-      ) : null}
 
       <Sequence
         from={sec(CONTENT_SECONDS, fps)}

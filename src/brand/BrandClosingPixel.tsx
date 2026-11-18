@@ -150,9 +150,14 @@ const SPARKLES = [
   { x: 0.54, y: 0.38, start: 0.76 },
 ];
 
+/** Suara ajakan bawaan closing ("follow day one eight untuk info lainnya"). */
+export const CLOSING_VOICE = "sfx/closing-vo.wav";
+
 type Props = {
   /** false = tanpa efek suara klik. */
   sound?: boolean;
+  /** false = tanpa suara ajakan; atau path lain di public/ untuk mengganti suaranya. */
+  voice?: boolean | string;
   logoSrc?: string;
   ctaLabel?: string;
   accent?: string;
@@ -160,6 +165,7 @@ type Props = {
 
 export const BrandClosingPixel: React.FC<Props> = ({
   sound = true,
+  voice = true,
   logoSrc,
   ctaLabel = "jangan lupa follow",
   accent = BRAND_YELLOW,
@@ -392,9 +398,14 @@ export const BrandClosingPixel: React.FC<Props> = ({
         </div>
       </div>
 
+      {voice ? (
+        <Sequence from={Math.round(0.25 * fps)} name="suara ajakan" layout="none">
+          <Audio src={staticFile(typeof voice === "string" ? voice : CLOSING_VOICE)} />
+        </Sequence>
+      ) : null}
       {sound ? (
         <Sequence from={tapFrame} name="sfx klik" layout="none">
-          <Audio src={staticFile("sfx/click.wav")} volume={1} />
+          <Audio src={staticFile("sfx/click.wav")} volume={0.6} />
         </Sequence>
       ) : null}
     </AbsoluteFill>

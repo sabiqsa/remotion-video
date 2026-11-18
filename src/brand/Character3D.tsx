@@ -16,6 +16,7 @@ import {
   CartoonRig,
   DEFAULT_CARTOON_COLORS,
   FaceState,
+  Wardrobe,
 } from "./cartoonBody";
 
 export type CharacterModel = "mannequin" | "superhero_male" | "superhero_female";
@@ -96,6 +97,8 @@ export type Character3DProps = {
   face?: FaceState;
   /** warna tubuh kartun */
   colors?: Partial<CartoonColors>;
+  /** rambut, baju, aksesori (lihat src/brand/wardrobe.ts & still WardrobeSheet) */
+  wardrobe?: Wardrobe;
   model?: CharacterModel;
   hair?: HairStyle | null;
   /** waktu video dalam detik */
@@ -121,6 +124,7 @@ export const Character3D: React.FC<Character3DProps> = ({
   look = "cartoon",
   face,
   colors,
+  wardrobe,
   model: modelProp = "mannequin",
   hair = null,
   t,
@@ -133,6 +137,7 @@ export const Character3D: React.FC<Character3DProps> = ({
 }) => {
   const model: CharacterModel = look === "cartoon" ? "mannequin" : modelProp;
   const colorKey = JSON.stringify(colors ?? {});
+  const wardrobeKey = JSON.stringify(wardrobe ?? {});
   const paths = useMemo(() => {
     const p = [CHARACTER_FILES[model], ANIMATION_FILE];
     if (hair) p.push(HAIR_FILES[hair]);
@@ -193,11 +198,13 @@ export const Character3D: React.FC<Character3DProps> = ({
           return b;
         },
         { ...DEFAULT_CARTOON_COLORS, ...(JSON.parse(colorKey) as Partial<CartoonColors>) },
+        JSON.parse(wardrobeKey) as Wardrobe,
+        "shirt" in (JSON.parse(colorKey) as object),
       );
     }
     return { root, hairRoot, mixer, byName, boneMap, cartoon };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [gltfs, model, look, colorKey, tint?.main, tint?.joints]);
+  }, [gltfs, model, look, colorKey, wardrobeKey, tint?.main, tint?.joints]);
 
   useLayoutEffect(() => {
     if (!rig) return;

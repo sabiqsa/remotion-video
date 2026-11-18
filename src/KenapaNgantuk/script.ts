@@ -163,8 +163,7 @@ export const FOOD_ITEMS: FoodItem[] = FOOD_BASE.map((f) => ({
   at: syncAt('food', f.sync, f.at),
 }));
 
-/** Voiceover closing (opsional). */
-export const CLOSING_VO = VO['closing'];
+// Suara closing ("follow day one eight…") kini bawaan BrandClosingPixel (public/sfx/closing-vo.wav).
 
 export const SOURCE = {
   name: 'alodokter.com',

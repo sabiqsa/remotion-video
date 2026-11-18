@@ -1,0 +1,17 @@
+{
+  "out": "public/vo/masuk-angin",
+  "module": "src/MasukAngin/vo.generated.ts",
+  "clips": {
+    "hook": "kenapa bisa masuk angin? padahal jendela udah ditutup rapat.",
+    "promise": "tenang, ternyata bukan angin pelakunya. ini lima tersangka aslinya.",
+    "p1": "pertama, flu dan infeksi saluran napas. bikin meriang, pilek, badan pegal.",
+    "p2": "kedua, perut bermasalah. kembung, mual, sendawa terus, bisa karena maag.",
+    "p3": "ketiga, daya tahan tubuh turun. badan jadi gampang kena infeksi.",
+    "p4": "keempat, kerokan. coba tebak, merahnya itu apa?",
+    "jawab": "jawabannya B, pembuluh darah kecil yang pecah. bikin lega, tapi bukan menyembuhkan.",
+    "p5": "kelima, angin duduk. nah, yang ini serius. nyeri dada bisa tanda masalah jantung.",
+    "tips": "yang aman: minum air hangat dan istirahat cukup.",
+    "dokter": "tapi kalau demam lebih dari tiga hari, muntah atau diare terus, atau nyeri dada, langsung ke dokter.",
+    "komen": "eh, kamu tim kerokan atau tim minyak angin? tulis di komen ya."
+  }
+}
