@@ -3,6 +3,10 @@ import { HelloWorld } from "./HelloWorld";
 import { Logo } from "./HelloWorld/Logo";
 import { Title } from "./HelloWorld/Title";
 import { KenapaNgantuk } from "./KenapaNgantuk";
+import { HujanSore } from "./HujanSore";
+import { FPS as HS_FPS, TOTAL_SECONDS as HS_TOTAL } from "./HujanSore/script";
+import { MataKedutan } from "./MataKedutan";
+import { FPS as MK_FPS, TOTAL_SECONDS as MK_TOTAL } from "./MataKedutan/script";
 import { KopiNgantuk } from "./KopiNgantuk";
 import { FPS as KN_FPS, TOTAL_SECONDS as KN_TOTAL } from "./KopiNgantuk/script";
 import { MasukAngin } from "./MasukAngin";
@@ -41,6 +45,22 @@ export const RemotionRoot: React.FC = () => {
         component={KopiNgantuk}
         durationInFrames={Math.round(KN_TOTAL * KN_FPS)}
         fps={KN_FPS}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="HujanSore"
+        component={HujanSore}
+        durationInFrames={Math.round(HS_TOTAL * HS_FPS)}
+        fps={HS_FPS}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="MataKedutan"
+        component={MataKedutan}
+        durationInFrames={Math.round(MK_TOTAL * MK_FPS)}
+        fps={MK_FPS}
         width={1080}
         height={1920}
       />

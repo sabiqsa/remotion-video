@@ -1,0 +1,17 @@
+{
+  "out": "public/vo/hujan-sore",
+  "module": "src/HujanSore/vo.generated.ts",
+  "clips": {
+    "hook": "kenapa hujan sering turun sore? padahal siangnya panas banget.",
+    "kerja": "tenang, awan juga punya jam kerja.",
+    "promise": "ini prosesnya, cuma tiga langkah.",
+    "p1": "pertama, dari pagi matahari manasin tanah.",
+    "p2": "kedua, udara hangat dan lembap naik, makin tinggi makin dingin, lalu ngembun jadi awan.",
+    "p3": "ketiga, awannya numpuk berjam-jam, kayak cucian seminggu. sore, kepenuhan, tumpah deh.",
+    "data": "data tujuh tahun dari tiga puluh satu stasiun: hujan umumnya memuncak sore, paling jarang pagi.",
+    "tapi": "tapi tiap daerah beda, ada yang malam, bahkan dini hari.",
+    "tips": "jadi kalau siang terik banget, siapin payung buat sore.",
+    "serius": "hujan sore sering bawa petir dan angin kencang. waspada ya.",
+    "komen": "di tempatmu hujannya jam berapa? tulis di komen."
+  }
+}

@@ -10,6 +10,7 @@ import math
 import os
 import random
 import struct
+import sys
 import wave
 
 SR = 44100
@@ -151,8 +152,108 @@ def slurp():
     return out
 
 
+def rain():
+    """guyuran hujan sekali (±1.6 dtk): desis noise terang + tetesan acak, masuk cepat lalu reda."""
+    n = int(SR * 1.6)
+    low = lp_noise(n, 0.15, 7)
+    random.seed(8)
+    white = [random.random() * 2 - 1 for _ in range(n)]
+    drops = [0.0] * n
+    random.seed(9)
+    for _ in range(90):
+        at = random.randint(0, n - 2000)
+        f = random.uniform(1800, 3800)
+        a = random.uniform(0.3, 1.0)
+        for k in range(1200):
+            drops[at + k] += a * math.sin(2 * math.pi * f * k / SR) * math.exp(-k / 180)
+    out = []
+    for i in range(n):
+        t = i / SR
+        e = min(1.0, t / 0.12) * (1.0 if t < 0.9 else math.exp(-(t - 0.9) / 0.25))
+        out.append(((white[i] - low[i]) * 0.55 + drops[i] * 0.25) * e)
+    return out
+
+
+def thunder():
+    """petir: retakan tajam lalu gemuruh rendah ±1.4 dtk."""
+    n = int(SR * 1.4)
+    crack = lp_noise(n, 0.6, 11)
+    rumble = lp_noise(n, 0.012, 12)
+    out = []
+    for i in range(n):
+        t = i / SR
+        c = crack[i] * math.exp(-t / 0.05)
+        r = rumble[i] * 9 * min(1.0, t / 0.08) * math.exp(-t / 0.5)
+        out.append(c * 0.8 + r)
+    return out
+
+
+def drip():
+    """tetes air pertama 'plok': sinus menurun 1300→420 Hz."""
+    n = int(SR * 0.12)
+    out, ph = [], 0.0
+    for i in range(n):
+        t = i / SR
+        f = 420 + 880 * math.exp(-t / 0.025)
+        ph += 2 * math.pi * f / SR
+        out.append(math.sin(ph) * env(t, 0.002, 0.03))
+    return out
+
+
+def coin():
+    """koin 'tring': dua nada terang (B6 → E7) dengan sedikit harmonik, ekor pendek."""
+    n = int(SR * 0.5)
+    out = []
+    for i in range(n):
+        t = i / SR
+        f = 1976 if t < 0.07 else 2637
+        t2 = t if t < 0.07 else t - 0.07
+        e = env(t2, 0.002, 0.06 if t < 0.07 else 0.16)
+        out.append((math.sin(2 * math.pi * f * t) + 0.35 * math.sin(2 * math.pi * f * 2.01 * t)) * e * 0.8)
+    return out
+
+
+def buzz():
+    """getar HP 'bzzt bzzt': dengung 170 Hz kasar, dua pulsa."""
+    n = int(SR * 0.62)
+    out = []
+    for i in range(n):
+        t = i / SR
+        on = (0.0 <= t < 0.22) or (0.32 <= t < 0.54)
+        if not on:
+            out.append(0.0)
+            continue
+        tt = t if t < 0.27 else t - 0.32
+        g = min(1.0, tt / 0.01) * min(1.0, (0.22 - tt) / 0.02)
+        x = math.sin(2 * math.pi * 170 * t)
+        x = max(-0.6, min(0.6, x * 1.8)) + 0.25 * math.sin(2 * math.pi * 340 * t)
+        out.append(x * g)
+    return out
+
+
+def twitch():
+    """'dug-dug' kedut: tiga ketukan rendah cepat (sinus 140→70 Hz)."""
+    n = int(SR * 0.5)
+    out = [0.0] * n
+    for k, at in enumerate([0.0, 0.11, 0.22]):
+        start = int(at * SR)
+        ph = 0.0
+        for i in range(int(SR * 0.09)):
+            t = i / SR
+            f = 70 + 70 * math.exp(-t / 0.02)
+            ph += 2 * math.pi * f / SR
+            if start + i < n:
+                out[start + i] += math.sin(ph) * env(t, 0.002, 0.03) * (1 - 0.15 * k)
+    return out
+
+
 if __name__ == "__main__":
     for name, fn in [("whoosh", whoosh), ("thud", thud), ("boing", boing), ("burp", burp),
-                     ("srek", srek), ("tick", tick), ("ding", ding), ("pop", pop), ("slurp", slurp)]:
+                     ("srek", srek), ("tick", tick), ("ding", ding), ("pop", pop), ("slurp", slurp),
+                     ("rain", rain), ("thunder", thunder), ("drip", drip),
+                     ("coin", coin), ("buzz", buzz), ("twitch", twitch)]:
+        # python3 scripts/make_sfx_comedy.py rain thunder  → hanya file itu
+        if len(sys.argv) > 1 and name not in sys.argv[1:]:
+            continue
         write(f"{name}.wav", fn())
     print("ok:", os.path.abspath(OUT))

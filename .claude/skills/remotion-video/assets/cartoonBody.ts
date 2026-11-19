@@ -51,6 +51,10 @@ export type FaceState = {
   blush?: number;
   /** 0..1 tetes keringat di pelipis */
   sweat?: number;
+  /** 0..1 kelopak mata KIRI (sisi +X karakter) menyempit: dipakai sebagai kedutan per ketukan */
+  twitchL?: number;
+  /** 0..1 kantung mata gelap (kurang tidur) */
+  bags?: number;
 };
 
 export type CartoonRig = {
@@ -60,6 +64,7 @@ export type CartoonRig = {
   yawnMouth: THREE.Mesh;
   teeth: THREE.Object3D;
   sweat: THREE.Object3D;
+  bags: THREE.MeshStandardMaterial;
   skinMats: THREE.MeshStandardMaterial[];
   lipMats: THREE.MeshStandardMaterial[];
   cheekMats: THREE.MeshStandardMaterial[];
@@ -136,6 +141,11 @@ const buildHead = (c: CartoonColors, w: Wardrobe) => {
     add(new THREE.SphereGeometry(0.045 * K, 16, 12), mat("#1b1b1f", { roughness: 0.2 }), [0, -0.01, 0.035], [1, 1, 1], [0, 0, 0], g);
     eyes.push(g);
   }
+  // kantung mata (tak terlihat sampai face.bags > 0)
+  const bags = mat("#7b4f7a", { transparent: true, opacity: 0 });
+  for (const s of [-1, 1]) {
+    add(new THREE.SphereGeometry(0.07 * K, 16, 12), bags, [s * 0.16, -0.035, 0.405], [1.1, 0.35, 0.3]);
+  }
 
   const brows: THREE.Object3D[] = [];
   for (const s of [-1, 1]) {
@@ -187,6 +197,7 @@ const buildHead = (c: CartoonColors, w: Wardrobe) => {
       yawnMouth,
       teeth,
       sweat,
+      bags,
       skinMats: [skin as THREE.MeshStandardMaterial],
       lipMats: [lip as THREE.MeshStandardMaterial, inner as THREE.MeshStandardMaterial],
       cheekMats: [cheek as THREE.MeshStandardMaterial],
@@ -448,15 +459,22 @@ export const applyFace = (rig: CartoonRig, face: FaceState = {}) => {
   const pale = c01(face.pale, 0);
   const blush = c01(face.blush, 0);
   const sweat = c01(face.sweat, 0);
+  const twitchL = c01(face.twitchL, 0);
+  const bags = c01(face.bags, 0);
 
   // mata: kesakitan → dipicingkan
-  for (const e of rig.eyes) e.scale.y = Math.max(0.06, eyeOpen * (1 - pain * 0.75));
+  rig.eyes.forEach((e, i) => {
+    const tw = i === 1 ? twitchL : 0;
+    e.scale.y = Math.max(0.06, eyeOpen * (1 - pain * 0.75) * (1 - tw * 0.7));
+  });
+  rig.bags.opacity = bags * 0.75;
 
   // alis: ngantuk turun, sedih ujung dalam naik, kaget naik
   for (const b of rig.brows) {
     const s = b.userData.side as number;
-    b.rotation.z = s * (-0.1 - sleepy * 0.25 - sad * 0.5 + pain * 0.3);
-    b.position.y = (0.2 - sleepy * 0.03 + surprise * 0.06 + sad * 0.015) * K;
+    const tw = s > 0 ? twitchL : 0;
+    b.rotation.z = s * (-0.1 - sleepy * 0.25 - sad * 0.5 + pain * 0.3 + tw * 0.25);
+    b.position.y = (0.2 - sleepy * 0.03 + surprise * 0.06 + sad * 0.015 - tw * 0.04) * K;
   }
 
   // warna: pucat & merona

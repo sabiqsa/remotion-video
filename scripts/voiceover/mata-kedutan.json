@@ -1,0 +1,16 @@
+{
+  "out": "public/vo/mata-kedutan",
+  "module": "src/MataKedutan/vo.generated.ts",
+  "clips": {
+    "hook": "mata kedutan, pertanda rezeki? atau cuma kurang tidur?",
+    "mitos": "katanya, kalau yang kiri, bakal dapet cuan.",
+    "promise": "jadi yang bener yang mana? kata sains, pemicunya ada tiga.",
+    "p1": "pertama, kurang tidur. otot kelopak mata jadi sensitif, gampang kedutan sendiri.",
+    "p2": "kedua, kebanyakan kafein. kopi itu stimulan, ototnya ikut kesetrum.",
+    "p3": "ketiga, stres dan kelamaan natap layar. matanya capek dan kering.",
+    "fakta": "namanya miokimia. umumnya nggak bahaya, dan hilang sendiri.",
+    "tips": "jadi tidur cukup, kurangi kopi, dan istirahatin mata dari layar.",
+    "serius": "tapi kalau lebih dari dua minggu, sampai kelopaknya nutup, atau menjalar ke wajah, cek ke dokter ya.",
+    "komen": "kamu biasanya kedutan kiri atau kanan? tulis di komen."
+  }
+}

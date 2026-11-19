@@ -176,3 +176,7 @@ export const sceneById = (id: SceneId): Scene =>
 export const CONTENT_SECONDS = SCENES.reduce((a, s) => a + s.duration, 0);
 export const CLOSING_SECONDS = PIXEL_CLOSING_SECONDS;
 export const TOTAL_SECONDS = CONTENT_SECONDS + CLOSING_SECONDS;
+
+/** Detik frame hook yang dipakai sebagai cover (judul tampil penuh + aksi karakter):
+ *  npx remotion still KenapaNgantuk out/01-kenapa-ngantuk/cover.png --frame=132 --image-format=png */
+export const COVER_AT = 2.2;

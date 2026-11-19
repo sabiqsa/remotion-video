@@ -24,7 +24,12 @@ Panduan membuat video Remotion yang konsisten dengan brand @day.one.eight dan ti
 5. **Verifikasi tanpa merender video**: `npx tsc --noEmit`, `npx eslint src/<NamaVideo>`, grep anti-floating (di bawah), lalu cek visual lewat Remotion Studio atau still (`npx remotion still <Id> out.jpg --frame=N --scale=0.3`) di setiap scene + closing. Periksa terutama: teks tidak meluber/terpotong, blok highlight tidak terbelah dua baris, elemen tidak menabrak teks. Jangan jalankan `npx remotion render`.
 6. **Serah terima**: sebutkan file yang dibuat, ID komposisi, durasi, apa yang belum dicek (mis. suara belum didengar), dan perintah render siap salin:
    ```bash
-   npx remotion render <Id> out/<nama>.mp4 --codec=h264 --crf=18 --audio-bitrate=320k
+   npx remotion render <Id> out/<NN>-<nama>/<nama>.mp4 --codec=h264 --crf=18 --audio-bitrate=320k
+   ```
+   **Folder hasil berurut per konten:** `out/<NN>-<nama>/` dengan `NN` = nomor urut 2 digit (lanjutan folder bernomor tertinggi di `out/`, mis. `04-…`). Isinya `<nama>.mp4`, `caption.txt` (baris 1 `NN – <nama>.mp4 (m:ss)`, lalu judul/caption/sumber/tag/komentar pin TikTok + blok YouTube Shorts), dan opsional `cover.png`. Aset non-konten (`karakter/`, `youtube/`, `voice-*`) tetap di akar `out/`.
+   **Cover wajib** di setiap video (`out/<NN>-<nama>/cover.png`, 1080×1920) = **frame asli dari video**, bukan desain terpisah, supaya cover pasti sesuai isi konten. Rancang hook agar judulnya **sama dengan judul upload** (mis. "habis ngopi kok *ngantuk?*") dan ada momen aksi yang menggambarkannya; cover diambil di detik saat judul sudah tampil penuh + aksi paling jelas (mis. kepala jatuh, si angin dicoret "bukan aku!"). Catat detiknya sebagai `export const COVER_AT` (+ perintah still di komentarnya) di `script.ts`. Judul & wajah karakter wajib di **tengah 1080×1440** (grid profil TikTok memotong cover jadi 3:4; rak Shorts juga memotong tengah) — cek dengan `sips -c 1440 1080`. Masukkan momen cover ke rencana review. Perintah (frame = detik × 60; jangan pakai komposisi 1-frame + `<Freeze>` — Sequence di dalamnya terpotong durasi 1 frame sehingga teks hilang):
+   ```bash
+   npx remotion still <Id> out/<NN>-<nama>/cover.png --frame=<COVER_AT×60> --image-format=png
    ```
 
 ## Spesifikasi format
@@ -35,7 +40,7 @@ Panduan membuat video Remotion yang konsisten dengan brand @day.one.eight dan ti
 | FPS | **60** |
 | Codec saran | H.264, CRF 18 |
 | Safe zone | atas 150px, bawah 380px, kanan 140px, kiri 80px (UI TikTok/Reels menutupi area ini) |
-| Durasi | **di atas 60 detik** (±60–75 dtk, termasuk closing 4 dtk) — preferensi channel; isi dengan poin, kuis, dan komedi, bukan jeda kosong |
+| Durasi | **50–59 detik** total (termasuk closing 4 dtk → konten ±46–55 dtk) — preferensi channel. Narasi Voicebox ±13 karakter/dtk + jeda ±0.65 dtk per scene; bila lewat, pangkas naskah (jangan percepat tempo). Isi dengan poin + komedi, bukan jeda kosong |
 | Audio | **−14 LUFS** terintegrasi, true peak **≤ −1.5 dBTP**, AAC 320 kbps (`--audio-bitrate=320k`). Lebih pelan dari itu → TikTok menaikkan volume & menekan puncak → kresek. |
 
 Tulis semua waktu dalam **detik** dan konversi dengan `sec(detik, fps)`. Angka frame mentah yang ditulis untuk 30fps akan jadi dua kali lebih cepat di 60fps.
@@ -131,7 +136,7 @@ node scripts/transcribe.mjs public/vo/<video>/full.wav /tmp/<video>.json --model
 node scripts/match_voiceover.mjs scripts/voiceover/<video>.json public/vo/<video>/full.wav /tmp/<video>.json
 ```
 
-Script pertama generate tiap klip (async → poll `/history/{id}` → `export-audio`), simpan di `public/vo/<video>/raw/`, beri peringatan bila durasi jauh di atas perkiraan (±13 karakter/dtk = tanda ocehan), lalu menggabungkan semua klip + jeda 1 dtk jadi `full.wav`. Pelajaran: **sampel profil yang pendek/transkripnya tidak cocok membuat Qwen "melanjutkan" sampel** (ocehan "kaba kaba kabar…" di awal, atau mengulang "apakah…") — jangan pakai profil lama "Indonesia". Setiap generate tercatat di riwayat Voicebox user. Bila Voicebox tidak jalan (`curl 127.0.0.1:17493/health` gagal), minta user membuka aplikasinya.
+Script pertama generate tiap klip (async → poll `/history/{id}` → `export-audio`), simpan di `public/vo/<video>/raw/`, beri peringatan bila durasi jauh di atas perkiraan (±13 karakter/dtk = tanda ocehan), lalu menggabungkan semua klip + jeda 1 dtk jadi `full.wav`. Pelajaran: **sampel profil yang pendek/transkripnya tidak cocok membuat Qwen "melanjutkan" sampel** (ocehan "kaba kaba kabar…" di awal, atau mengulang "apakah…") — jangan pakai profil lama "Indonesia". Setiap generate tercatat di riwayat Voicebox user. Bila Voicebox tidak jalan (`curl 127.0.0.1:17493/health` gagal), minta user membuka aplikasinya. **Kata terakhir terpotong:** Qwen3-TTS sering berhenti terlalu cepat sehingga suku kata terakhir putus mendadak (terdengar "kepotong"; terjadi di 5/13 klip KopiNgantuk dan 3/11 MasukAngin). Ciri pastinya: suara jatuh ke hening digital (< −85 dB) **≤ 50 ms** setelah bunyi terakhir (> −40 dB), sedangkan generate yang selesai normal masih menyisakan suara ruang ±60–330 ms (jangan cuma mengukur 60 ms terakhir — file yang terpotong sering ditutup hening digital sehingga lolos). Script menambahkan pad `" .."` di akhir teks (heningnya dibuang matcher), memeriksa tiap klip mentah dengan ciri itu, dan mencoba ulang hingga 6× dengan seed+1 serta pad bergantian (`" .."`, `" ..."`, `" .. ."`); `--no-pad` mematikan pad. Klip lama yang terpotong → generate ulang dengan `--only <id>` lalu transkripsi + match ulang.
 
 Alternatif: user membuat suara sendiri di tool TTS pihak ketiga dari transkrip `voiceover.md` (lalu langkah 3–7 di bawah), atau ElevenLabs API via `make_voiceover.mjs` bila ada API key.
 
@@ -215,8 +220,10 @@ import { BoneOverride, Character3D } from "../brand/Character3D";
   - mata `eyeOpen` (kedip di daftar waktu tetap), alis `sleepy` (turun), `sad` (ujung dalam naik, khawatir), `surprise` (naik)
   - mulut `smile`, `frown` (cemberut), `open` (mulut "O": kaget/"waduh"/"ah—"), `yawn` (menguap), `pain` (meringis: gigi terlihat + mata dipicingkan)
   - warna `pale` (kulit & **bibir pucat** saat sakit), `blush` (merona malu/senang), `sweat` (tetes keringat)
+  - `twitchL` (kelopak **kiri** menyempit + alis kiri turun = kedutan; mainkan per ketukan: sempit 0.03 dtk → buka 0.09 dtk, rentetan 3× berjarak 0.11 dtk = sama dengan sfx `twitch`), `bags` (kantung mata gelap, kurang tidur)
   - Resep: sakit = `pale .55 + sad .55 + frown .35`; kaget = `open .85 + surprise 1 + sweat .8`; malu = `smile .35 + blush 1 + sweat .6`; kesakitan = `pain 1 + sweat 1`; khawatir = `sad .9 + frown .7 + pale .7`; senang = `smile 1 + blush .6`.
   - Lihat semua di still `FaceSheet` (folder Brand) sebelum memilih nilai.
+- **Kamera macro** (contoh `src/MataKedutan/`): kanvas 3D penuh 1080×1920 dengan `camera.setViewOffset(1080, 2520, 0, 0, 1080, 1920)` + fov 66.6 → pose kamera gaya lama (kanvas mulai `top: 600`) tetap berlaku. Zoom ke mata: dorong 0.3 dtk `EASE.inOut` ke ±0.24 di depan mata, tahan, tarik keluar 0.45–0.6 dtk; tambah letterbox + vignette + blur tepi (`backdrop-filter` bermasker radial) selama macro. Mata kartun berdiameter ±0.06 pada `scale 1.75`; ukur posisinya dari still (triangulasi dua sudut + ukuran di layar), dan beri geser per zoom bila pose kepala sedang berubah (tersentak/condong).
 - **Warna** bisa diganti lewat `colors={{ shirt, pants, skin, hair, shoes, collar }}` (mis. variasi tokoh kedua), tapi default tetap si biru.
 - **Wardrobe** (`wardrobe={{ hair, outfit, accessories }}`, semua dibangun dari kode di `wardrobe.ts` + `cartoonBody.ts`, boleh diganti per scene/tokoh). Lihat still `WardrobeSheet` (folder Brand) atau `assets/wardrobe-katalog.jpg` sebelum memilih:
   - `hair`: `bowl` (default), `comma` (comma hair), `spiky`, `curly`, `side`, `ponytail`, `bald`; warnanya ikut `colors.hair`.

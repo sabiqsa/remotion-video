@@ -3,7 +3,7 @@
 // Tandai kata kunci dengan *bintang*; `sync` = kata narasi pemicu munculnya baris.
 
 import { PIXEL_CLOSING_SECONDS } from "../brand/BrandClosingPixel";
-import { sceneDurationFor, VO_LEAD, wordTime } from "../brand/voiceover";
+import { VO_LEAD, wordTime } from "../brand/voiceover";
 import type { Line } from "../brand/WordText";
 import { VO } from "./vo.generated";
 
@@ -143,10 +143,15 @@ export const syncAt = (id: string, word: string | undefined, fallback: number) =
   return w === null ? fallback : Math.max(0, VO_LEAD + w - 0.06);
 };
 
+/** Jeda setelah suara habis. Durasi scene = VO_LEAD + suara + TAIL (durasi dasar hanya untuk scene tanpa
+ * suara, mis. hitung mundur kuis) → jeda antar scene ±0.65 dtk, bukan ±0.9 dtk. */
+const TAIL = 0.2;
+
 export const SCENES: Scene[] = (() => {
   let start = 0;
   return scenes.map((s) => {
-    const duration = sceneDurationFor(VO[s.id], s.duration);
+    const clip = VO[s.id];
+    const duration = clip ? VO_LEAD + clip.duration + TAIL : s.duration;
     const lines = s.lines.map((l) => ({ ...l, at: syncAt(s.id, l.sync, l.at) }));
     const out = { ...s, duration, lines, start };
     start += duration;
@@ -165,3 +170,7 @@ export const beat = (id: SceneId, word: string | undefined, fallback: number) =>
 export const CONTENT_SECONDS = SCENES.reduce((a, s) => a + s.duration, 0);
 export const CLOSING_SECONDS = PIXEL_CLOSING_SECONDS;
 export const TOTAL_SECONDS = CONTENT_SECONDS + CLOSING_SECONDS;
+
+/** Detik frame hook yang dipakai sebagai cover (judul tampil penuh + aksi karakter):
+ *  npx remotion still MasukAngin out/02-masuk-angin/cover.png --frame=150 --image-format=png */
+export const COVER_AT = 2.5;

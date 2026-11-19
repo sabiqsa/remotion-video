@@ -6,51 +6,51 @@
       0.1,
       3.98
     ],
-    "match": 0.82,
+    "match": 0.61,
     "words": [
       {
         "word": "review",
         "start": 0.12,
-        "end": 0.422
+        "end": 0.421
       },
       {
         "word": "jujur",
-        "start": 0.422,
-        "end": 0.847
+        "start": 0.421,
+        "end": 0.843
       },
       {
         "word": "americano.",
-        "start": 0.847,
-        "end": 1.773
+        "start": 0.843,
+        "end": 1.515
       },
       {
         "word": "sruput",
-        "start": 1.773,
-        "end": 2.235
+        "start": 1.515,
+        "end": 2.186
       },
       {
         "word": "dulu...",
-        "start": 2.235,
-        "end": 2.5
+        "start": 2.186,
+        "end": 2.468
       },
       {
         "word": "lho,",
-        "start": 2.5,
-        "end": 2.764
+        "start": 2.468,
+        "end": 2.75
       },
       {
         "word": "kok",
-        "start": 2.764,
-        "end": 2.83
+        "start": 2.75,
+        "end": 2.816
       },
       {
         "word": "malah",
-        "start": 2.83,
-        "end": 3.161
+        "start": 2.816,
+        "end": 3.126
       },
       {
         "word": "ngantuk?",
-        "start": 3.161,
+        "start": 3.126,
         "end": 3.88
       }
     ]
@@ -67,51 +67,51 @@
       {
         "word": "rating",
         "start": 0.12,
-        "end": 0.815
+        "end": 0.802
       },
       {
         "word": "melek:",
-        "start": 0.815,
-        "end": 1.296
+        "start": 0.802,
+        "end": 1.291
       },
       {
         "word": "satu",
-        "start": 1.296,
-        "end": 1.747
+        "start": 1.291,
+        "end": 1.736
       },
       {
         "word": "dari",
-        "start": 1.747,
-        "end": 2.099
+        "start": 1.736,
+        "end": 2.081
       },
       {
         "word": "lima.",
-        "start": 2.099,
-        "end": 2.715
+        "start": 2.081,
+        "end": 2.706
       },
       {
         "word": "maaf",
-        "start": 2.715,
-        "end": 3.095
+        "start": 2.706,
+        "end": 3.087
       },
       {
         "word": "ya,",
-        "start": 3.095,
-        "end": 3.289
+        "start": 3.087,
+        "end": 3.281
       },
       {
         "word": "kopi.",
-        "start": 3.289,
+        "start": 3.281,
         "end": 3.89
       }
     ]
   },
   "promise": {
     "file": "vo/kopi-ngantuk/promise.wav",
-    "duration": 3.94,
+    "duration": 4.24,
     "source": [
       10.41,
-      14.35
+      14.65
     ],
     "match": 0.89,
     "words": [
@@ -123,123 +123,123 @@
       {
         "word": "ternyata",
         "start": 0.12,
-        "end": 0.757
+        "end": 0.777
       },
       {
         "word": "bukan",
-        "start": 0.757,
-        "end": 1.245
+        "start": 0.777,
+        "end": 1.242
       },
       {
         "word": "salah",
-        "start": 1.245,
-        "end": 1.537
+        "start": 1.242,
+        "end": 1.595
       },
       {
         "word": "kopinya",
-        "start": 1.537,
-        "end": 2.119
+        "start": 1.595,
+        "end": 2.188
       },
       {
         "word": "doang.",
-        "start": 2.119,
-        "end": 2.804
+        "start": 2.188,
+        "end": 2.998
       },
       {
         "word": "ada",
-        "start": 2.804,
-        "end": 2.914
+        "start": 2.998,
+        "end": 3.078
       },
       {
         "word": "lima",
-        "start": 2.914,
-        "end": 3.236
+        "start": 3.078,
+        "end": 3.455
       },
       {
         "word": "alasan.",
-        "start": 3.236,
-        "end": 3.94
+        "start": 3.455,
+        "end": 4.24
       }
     ]
   },
   "p1": {
     "file": "vo/kopi-ngantuk/p1.wav",
-    "duration": 7.59,
+    "duration": 6.66,
     "source": [
-      15.57,
-      23.16
+      16.05,
+      22.71
     ],
-    "match": 1,
+    "match": 0.88,
     "words": [
       {
         "word": "pertama,",
         "start": 0.12,
-        "end": 1.252
+        "end": 1.237
       },
       {
         "word": "adenosin",
-        "start": 1.252,
-        "end": 2.086
+        "start": 1.237,
+        "end": 1.91
       },
       {
         "word": "numpuk.",
-        "start": 2.086,
-        "end": 2.945
+        "start": 1.91,
+        "end": 2.407
       },
       {
         "word": "kafein",
-        "start": 2.945,
-        "end": 3.292
+        "start": 2.407,
+        "end": 2.904
       },
       {
         "word": "cuma",
-        "start": 3.292,
-        "end": 3.565
+        "start": 2.904,
+        "end": 3.175
       },
       {
         "word": "nahan",
-        "start": 3.565,
-        "end": 3.895
+        "start": 3.175,
+        "end": 3.454
       },
       {
         "word": "sinyal",
-        "start": 3.895,
-        "end": 4.292
+        "start": 3.454,
+        "end": 3.791
       },
       {
         "word": "ngantuk.",
-        "start": 4.292,
-        "end": 4.821
+        "start": 3.791,
+        "end": 4.39
       },
       {
         "word": "pas",
-        "start": 4.821,
-        "end": 5.093
+        "start": 4.39,
+        "end": 4.53
       },
       {
         "word": "efeknya",
-        "start": 5.093,
-        "end": 5.424
+        "start": 4.53,
+        "end": 4.891
       },
       {
         "word": "habis,",
-        "start": 5.424,
-        "end": 5.853
+        "start": 4.891,
+        "end": 5.376
       },
       {
         "word": "ngantuknya",
-        "start": 5.853,
-        "end": 6.465
+        "start": 5.376,
+        "end": 5.754
       },
       {
         "word": "datang",
-        "start": 6.465,
-        "end": 6.828
+        "start": 5.754,
+        "end": 6.033
       },
       {
         "word": "borongan.",
-        "start": 6.828,
-        "end": 7.59
+        "start": 6.033,
+        "end": 6.66
       }
     ]
   },
@@ -247,49 +247,49 @@
     "file": "vo/kopi-ngantuk/p2.wav",
     "duration": 4.15,
     "source": [
-      23.95,
-      28.1
+      23.55,
+      27.7
     ],
     "match": 1,
     "words": [
       {
         "word": "kedua,",
         "start": 0.12,
-        "end": 0.873
+        "end": 0.85
       },
       {
         "word": "kurang",
-        "start": 0.873,
-        "end": 1.454
+        "start": 0.85,
+        "end": 1.483
       },
       {
         "word": "tidur.",
-        "start": 1.454,
-        "end": 2.31
+        "start": 1.483,
+        "end": 2.343
       },
       {
         "word": "kopi",
-        "start": 2.31,
-        "end": 2.396
+        "start": 2.343,
+        "end": 2.506
       },
       {
         "word": "itu",
-        "start": 2.396,
-        "end": 2.6
+        "start": 2.506,
+        "end": 2.765
       },
       {
         "word": "bukan",
-        "start": 2.6,
-        "end": 2.985
+        "start": 2.765,
+        "end": 3.033
       },
       {
         "word": "pengganti",
-        "start": 2.985,
-        "end": 3.581
+        "start": 3.033,
+        "end": 3.536
       },
       {
         "word": "tidur.",
-        "start": 3.581,
+        "start": 3.536,
         "end": 4.15
       }
     ]
@@ -298,74 +298,74 @@
     "file": "vo/kopi-ngantuk/siklus.wav",
     "duration": 6.01,
     "source": [
-      29.07,
-      35.08
+      28.67,
+      34.68
     ],
     "match": 0.87,
     "words": [
       {
         "word": "apalagi",
         "start": 0.12,
-        "end": 0.446
+        "end": 0.456
       },
       {
         "word": "kalau",
-        "start": 0.446,
-        "end": 0.772
+        "start": 0.456,
+        "end": 0.793
       },
       {
         "word": "ngopi",
-        "start": 0.772,
-        "end": 1.132
+        "start": 0.793,
+        "end": 1.158
       },
       {
         "word": "sore.",
-        "start": 1.132,
-        "end": 1.569
+        "start": 1.158,
+        "end": 1.84
       },
       {
         "word": "tidur",
-        "start": 1.569,
-        "end": 1.939
+        "start": 1.84,
+        "end": 1.985
       },
       {
         "word": "jadi",
-        "start": 1.939,
-        "end": 2.26
+        "start": 1.985,
+        "end": 2.292
       },
       {
         "word": "jelek,",
-        "start": 2.26,
-        "end": 2.727
+        "start": 2.292,
+        "end": 2.898
       },
       {
         "word": "besoknya",
-        "start": 2.727,
-        "end": 3.301
+        "start": 2.898,
+        "end": 3.407
       },
       {
         "word": "ngantuk,",
-        "start": 3.301,
-        "end": 4.02
+        "start": 3.407,
+        "end": 4.07
       },
       {
         "word": "ngopi",
-        "start": 4.02,
-        "end": 4.312
+        "start": 4.07,
+        "end": 4.407
       },
       {
         "word": "lagi.",
-        "start": 4.312,
-        "end": 4.974
+        "start": 4.407,
+        "end": 4.916
       },
       {
         "word": "muter",
-        "start": 4.974,
-        "end": 5.353
+        "start": 4.916,
+        "end": 5.281
       },
       {
         "word": "terus.",
-        "start": 5.353,
+        "start": 5.281,
         "end": 6.01
       }
     ]
@@ -374,64 +374,64 @@
     "file": "vo/kopi-ngantuk/p3.wav",
     "duration": 4.81,
     "source": [
-      36.15,
-      40.96
+      35.75,
+      40.56
     ],
-    "match": 1,
+    "match": 0.86,
     "words": [
       {
         "word": "ketiga,",
         "start": 0.12,
-        "end": 1.004
+        "end": 0.949
       },
       {
         "word": "udah",
-        "start": 1.004,
-        "end": 1.504
+        "start": 0.949,
+        "end": 1.454
       },
       {
         "word": "kebal.",
-        "start": 1.504,
-        "end": 2.25
+        "start": 1.454,
+        "end": 2.227
       },
       {
         "word": "yang",
-        "start": 2.25,
-        "end": 2.465
+        "start": 2.227,
+        "end": 2.503
       },
       {
         "word": "rutin",
-        "start": 2.465,
-        "end": 2.826
+        "start": 2.503,
+        "end": 2.811
       },
       {
         "word": "ngopi,",
-        "start": 2.826,
-        "end": 3.218
+        "start": 2.811,
+        "end": 3.213
       },
       {
         "word": "efek",
-        "start": 3.218,
-        "end": 3.326
+        "start": 3.213,
+        "end": 3.45
       },
       {
         "word": "kafeinnya",
-        "start": 3.326,
-        "end": 3.81
+        "start": 3.45,
+        "end": 3.687
       },
       {
         "word": "bisa",
-        "start": 3.81,
-        "end": 4.026
+        "start": 3.687,
+        "end": 3.931
       },
       {
         "word": "makin",
-        "start": 4.026,
-        "end": 4.295
+        "start": 3.931,
+        "end": 4.2
       },
       {
         "word": "lemah.",
-        "start": 4.295,
+        "start": 4.2,
         "end": 4.81
       }
     ]
@@ -440,99 +440,99 @@
     "file": "vo/kopi-ngantuk/p4.wav",
     "duration": 7.59,
     "source": [
-      41.99,
-      49.58
+      41.59,
+      49.18
     ],
     "match": 0.75,
     "words": [
       {
         "word": "keempat,",
         "start": 0.12,
-        "end": 1.34
+        "end": 1.447
       },
       {
         "word": "gula.",
-        "start": 1.34,
-        "end": 2.201
+        "start": 1.447,
+        "end": 2.081
       },
       {
         "word": "kopi",
-        "start": 2.201,
-        "end": 2.312
+        "start": 2.081,
+        "end": 2.377
       },
       {
         "word": "manis",
-        "start": 2.312,
-        "end": 2.535
+        "start": 2.377,
+        "end": 2.58
       },
       {
         "word": "bisa",
-        "start": 2.535,
-        "end": 2.751
+        "start": 2.58,
+        "end": 2.808
       },
       {
         "word": "bikin",
-        "start": 2.751,
-        "end": 3.014
+        "start": 2.808,
+        "end": 3.087
       },
       {
         "word": "gula",
-        "start": 3.014,
-        "end": 3.221
+        "start": 3.087,
+        "end": 3.315
       },
       {
         "word": "darah",
-        "start": 3.221,
-        "end": 3.484
+        "start": 3.315,
+        "end": 3.594
       },
       {
         "word": "naik",
-        "start": 3.484,
-        "end": 3.795
+        "start": 3.594,
+        "end": 3.814
       },
       {
         "word": "turun.",
-        "start": 3.795,
-        "end": 4.167
+        "start": 3.814,
+        "end": 4.254
       },
       {
         "word": "americano",
-        "start": 4.167,
-        "end": 4.539
+        "start": 4.254,
+        "end": 4.693
       },
       {
         "word": "mah",
-        "start": 4.539,
-        "end": 4.911
+        "start": 4.693,
+        "end": 5.133
       },
       {
         "word": "aman,",
-        "start": 4.911,
-        "end": 5.293
+        "start": 5.133,
+        "end": 5.547
       },
       {
         "word": "kecuali",
-        "start": 5.293,
-        "end": 5.74
+        "start": 5.547,
+        "end": 6.021
       },
       {
         "word": "kamu",
-        "start": 5.74,
-        "end": 6.043
+        "start": 6.021,
+        "end": 6.3
       },
       {
         "word": "tambah",
-        "start": 6.043,
-        "end": 6.306
+        "start": 6.3,
+        "end": 6.608
       },
       {
         "word": "tiga",
-        "start": 6.306,
-        "end": 6.569
+        "start": 6.608,
+        "end": 6.917
       },
       {
         "word": "sachet.",
-        "start": 6.569,
+        "start": 6.917,
         "end": 7.59
       }
     ]
@@ -541,171 +541,171 @@
     "file": "vo/kopi-ngantuk/p5.wav",
     "duration": 3.63,
     "source": [
-      50.63,
-      54.26
+      50.23,
+      53.86
     ],
-    "match": 0.98,
+    "match": 0.85,
     "words": [
       {
         "word": "kelima,",
         "start": 0.12,
-        "end": 0.757
+        "end": 1.158
       },
       {
         "word": "gen.",
-        "start": 0.757,
-        "end": 1.254
+        "start": 1.158,
+        "end": 1.346
       },
       {
         "word": "tiap",
-        "start": 1.254,
-        "end": 1.469
+        "start": 1.346,
+        "end": 1.775
       },
       {
         "word": "orang",
-        "start": 1.469,
-        "end": 1.941
+        "start": 1.775,
+        "end": 2.29
       },
       {
         "word": "beda",
-        "start": 1.941,
-        "end": 2.18
+        "start": 2.29,
+        "end": 2.581
       },
       {
         "word": "cara",
-        "start": 2.18,
-        "end": 2.503
+        "start": 2.581,
+        "end": 2.958
       },
       {
         "word": "ngolah",
-        "start": 2.503,
-        "end": 2.9
+        "start": 2.958,
+        "end": 3.294
       },
       {
         "word": "kafein.",
-        "start": 2.9,
+        "start": 3.294,
         "end": 3.63
       }
     ]
   },
   "tips": {
     "file": "vo/kopi-ngantuk/tips.wav",
-    "duration": 8.1,
+    "duration": 8.51,
     "source": [
-      55.13,
-      63.23
+      54.73,
+      63.24
     ],
-    "match": 0.91,
+    "match": 0.93,
     "words": [
       {
         "word": "biar",
         "start": 0.12,
-        "end": 0.412
+        "end": 0.362
       },
       {
         "word": "nggak",
-        "start": 0.412,
-        "end": 0.703
+        "start": 0.362,
+        "end": 0.605
       },
       {
         "word": "zonk:",
-        "start": 0.703,
-        "end": 1.199
+        "start": 0.605,
+        "end": 1.277
       },
       {
         "word": "efek",
-        "start": 1.199,
-        "end": 1.53
+        "start": 1.277,
+        "end": 1.554
       },
       {
         "word": "kopi",
-        "start": 1.53,
-        "end": 1.861
+        "start": 1.554,
+        "end": 1.91
       },
       {
         "word": "bisa",
-        "start": 1.861,
-        "end": 2.23
+        "start": 1.91,
+        "end": 2.108
       },
       {
         "word": "lima",
-        "start": 2.23,
-        "end": 2.532
+        "start": 2.108,
+        "end": 2.435
       },
       {
         "word": "sampai",
-        "start": 2.532,
-        "end": 3.047
+        "start": 2.435,
+        "end": 2.939
       },
       {
         "word": "enam",
-        "start": 3.047,
-        "end": 3.378
+        "start": 2.939,
+        "end": 3.275
       },
       {
         "word": "jam.",
-        "start": 3.378,
-        "end": 4.088
+        "start": 3.275,
+        "end": 4.027
       },
       {
         "word": "jadi",
-        "start": 4.088,
-        "end": 4.292
+        "start": 4.027,
+        "end": 4.067
       },
       {
         "word": "ngopi",
-        "start": 4.292,
-        "end": 4.632
+        "start": 4.067,
+        "end": 4.344
       },
       {
         "word": "pagi,",
-        "start": 4.632,
-        "end": 5.051
+        "start": 4.344,
+        "end": 4.789
       },
       {
         "word": "maksimal",
-        "start": 5.051,
-        "end": 5.595
+        "start": 4.789,
+        "end": 5.283
       },
       {
         "word": "empat",
-        "start": 5.595,
-        "end": 5.936
+        "start": 5.283,
+        "end": 5.58
       },
       {
         "word": "cangkir",
-        "start": 5.936,
-        "end": 6.412
+        "start": 5.58,
+        "end": 6.164
       },
       {
         "word": "sehari,",
-        "start": 6.412,
-        "end": 6.928
+        "start": 6.164,
+        "end": 7.004
       },
       {
         "word": "dan",
-        "start": 6.928,
-        "end": 7.112
+        "start": 7.004,
+        "end": 7.202
       },
       {
         "word": "stop",
-        "start": 7.112,
-        "end": 7.316
+        "start": 7.202,
+        "end": 7.598
       },
       {
         "word": "di",
-        "start": 7.316,
-        "end": 7.423
+        "start": 7.598,
+        "end": 7.677
       },
       {
         "word": "sore",
-        "start": 7.423,
-        "end": 7.647
+        "start": 7.677,
+        "end": 7.993
       },
       {
         "word": "hari.",
-        "start": 7.647,
-        "end": 8.1
+        "start": 7.993,
+        "end": 8.51
       }
     ]
   },
@@ -713,207 +713,207 @@
     "file": "vo/kopi-ngantuk/serius.wav",
     "duration": 5.52,
     "source": [
-      64.25,
-      69.77
+      64.41,
+      69.93
     ],
-    "match": 0.9,
+    "match": 0.8,
     "words": [
       {
         "word": "tapi",
         "start": 0.12,
-        "end": 0.39
+        "end": 0.383
       },
       {
         "word": "kalau",
-        "start": 0.39,
-        "end": 0.66
+        "start": 0.383,
+        "end": 0.646
       },
       {
         "word": "ngantuk",
-        "start": 0.66,
-        "end": 1.157
+        "start": 0.646,
+        "end": 1.103
       },
       {
         "word": "terus",
-        "start": 1.157,
-        "end": 1.457
+        "start": 1.103,
+        "end": 1.428
       },
       {
         "word": "sampai",
-        "start": 1.457,
-        "end": 1.858
+        "start": 1.428,
+        "end": 1.753
       },
       {
         "word": "ganggu",
-        "start": 1.858,
-        "end": 2.26
+        "start": 1.753,
+        "end": 2.147
       },
       {
         "word": "aktivitas,",
-        "start": 2.26,
-        "end": 3.107
+        "start": 2.147,
+        "end": 2.844
       },
       {
         "word": "cek",
-        "start": 3.107,
-        "end": 3.26
+        "start": 2.844,
+        "end": 3.13
       },
       {
         "word": "ke",
-        "start": 3.26,
-        "end": 3.509
+        "start": 3.13,
+        "end": 3.192
       },
       {
         "word": "dokter.",
-        "start": 3.509,
-        "end": 3.91
+        "start": 3.192,
+        "end": 3.943
       },
       {
         "word": "dan",
-        "start": 3.91,
-        "end": 4.035
+        "start": 3.943,
+        "end": 3.981
       },
       {
         "word": "jangan",
-        "start": 4.035,
-        "end": 4.4
+        "start": 3.981,
+        "end": 4.291
       },
       {
         "word": "nyetir",
-        "start": 4.4,
-        "end": 4.714
+        "start": 4.291,
+        "end": 4.662
       },
       {
         "word": "pas",
-        "start": 4.714,
-        "end": 4.889
+        "start": 4.662,
+        "end": 4.809
       },
       {
         "word": "ngantuk.",
-        "start": 4.889,
+        "start": 4.809,
         "end": 5.52
       }
     ]
   },
   "ulang": {
     "file": "vo/kopi-ngantuk/ulang.wav",
-    "duration": 3.61,
+    "duration": 4.09,
     "source": [
-      70.79,
-      74.4
+      70.95,
+      75.04
     ],
-    "match": 1,
+    "match": 0.81,
     "words": [
       {
         "word": "rating",
         "start": 0.12,
-        "end": 0.659
+        "end": 0.877
       },
       {
         "word": "ulang:",
-        "start": 0.659,
-        "end": 0.996
+        "start": 0.877,
+        "end": 1.331
       },
       {
         "word": "empat",
-        "start": 0.996,
-        "end": 1.334
+        "start": 1.331,
+        "end": 1.784
       },
       {
         "word": "dari",
-        "start": 1.334,
-        "end": 1.603
+        "start": 1.784,
+        "end": 2.123
       },
       {
         "word": "lima.",
-        "start": 1.603,
-        "end": 2.143
+        "start": 2.123,
+        "end": 2.778
       },
       {
         "word": "asal",
-        "start": 2.143,
-        "end": 2.277
+        "start": 2.778,
+        "end": 3.046
       },
       {
         "word": "tidurnya",
-        "start": 2.277,
-        "end": 2.85
+        "start": 3.046,
+        "end": 3.535
       },
       {
         "word": "cukup.",
-        "start": 2.85,
-        "end": 3.61
+        "start": 3.535,
+        "end": 4.09
       }
     ]
   },
   "komen": {
     "file": "vo/kopi-ngantuk/komen.wav",
-    "duration": 4.58,
+    "duration": 4.36,
     "source": [
-      75.23,
-      79.81
+      76.11,
+      80.47
     ],
     "match": 1,
     "words": [
       {
         "word": "kamu",
         "start": 0.12,
-        "end": 0.478
+        "end": 0.424
       },
       {
         "word": "tim",
-        "start": 0.478,
-        "end": 0.588
+        "start": 0.424,
+        "end": 0.967
       },
       {
         "word": "americano,",
-        "start": 0.588,
-        "end": 1.203
+        "start": 0.967,
+        "end": 1.353
       },
       {
         "word": "atau",
-        "start": 1.203,
-        "end": 1.479
+        "start": 1.353,
+        "end": 1.665
       },
       {
         "word": "tim",
-        "start": 1.479,
-        "end": 1.672
+        "start": 1.665,
+        "end": 1.888
       },
       {
         "word": "kopi",
-        "start": 1.672,
-        "end": 1.965
+        "start": 1.888,
+        "end": 2.199
       },
       {
         "word": "susu",
-        "start": 1.965,
-        "end": 2.278
+        "start": 2.199,
+        "end": 2.504
       },
       {
         "word": "gula",
-        "start": 2.278,
-        "end": 2.48
+        "start": 2.504,
+        "end": 2.808
       },
       {
         "word": "aren?",
-        "start": 2.48,
-        "end": 2.893
+        "start": 2.808,
+        "end": 3.12
       },
       {
         "word": "tulis",
-        "start": 2.893,
-        "end": 3.232
+        "start": 3.12,
+        "end": 3.596
       },
       {
         "word": "di",
-        "start": 3.232,
-        "end": 3.646
+        "start": 3.596,
+        "end": 3.677
       },
       {
         "word": "komen.",
-        "start": 3.646,
-        "end": 4.58
+        "start": 3.677,
+        "end": 4.36
       }
     ]
   }

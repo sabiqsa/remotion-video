@@ -4,8 +4,26 @@
     {
       "name": "remotion-studio",
       "runtimeExecutable": "npx",
-      "runtimeArgs": ["remotion", "studio", "--port", "3000", "--no-open"],
+      "runtimeArgs": [
+        "remotion",
+        "studio",
+        "--port",
+        "3000",
+        "--no-open"
+      ],
       "port": 3000
+    },
+    {
+      "name": "remotion-studio-3001",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "remotion",
+        "studio",
+        "--port",
+        "3001",
+        "--no-open"
+      ],
+      "port": 3001
     }
   ]
 }

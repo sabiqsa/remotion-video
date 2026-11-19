@@ -1,0 +1,60 @@
+// DIBUAT OTOMATIS oleh scripts/match_voiceover.mjs — jangan diedit manual.
+import type { VoClip } from "../brand/voiceover";
+
+export const VO: Partial<Record<string, VoClip>> = {
+  "hook": {
+    file: "vo/hujan-sore/hook.wav",
+    duration: 4.03,
+    words: [{"word":"kenapa","start":0.12,"end":0.4},{"word":"hujan","start":0.4,"end":0.671},{"word":"sering","start":0.671,"end":1.104},{"word":"turun","start":1.104,"end":1.429},{"word":"sore?","start":1.429,"end":2.061},{"word":"padahal","start":2.061,"end":2.332},{"word":"siangnya","start":2.332,"end":2.882},{"word":"panas","start":2.882,"end":3.198},{"word":"banget.","start":3.198,"end":4.03}],
+  },
+  "kerja": {
+    file: "vo/hujan-sore/kerja.wav",
+    duration: 2.75,
+    words: [{"word":"tenang,","start":0.12,"end":0.887},{"word":"awan","start":0.887,"end":1.106},{"word":"juga","start":1.106,"end":1.434},{"word":"punya","start":1.434,"end":1.879},{"word":"jam","start":1.879,"end":2.105},{"word":"kerja.","start":2.105,"end":2.75}],
+  },
+  "promise": {
+    file: "vo/hujan-sore/promise.wav",
+    duration: 2.23,
+    words: [{"word":"ini","start":0.12,"end":0.339},{"word":"prosesnya,","start":0.339,"end":0.996},{"word":"cuma","start":0.996,"end":1.245},{"word":"tiga","start":1.245,"end":1.495},{"word":"langkah.","start":1.495,"end":2.23}],
+  },
+  "p1": {
+    file: "vo/hujan-sore/p1.wav",
+    duration: 2.76,
+    words: [{"word":"pertama,","start":0.12,"end":0.939},{"word":"dari","start":0.939,"end":0.963},{"word":"pagi","start":0.963,"end":1.222},{"word":"matahari","start":1.222,"end":1.741},{"word":"manasin","start":1.741,"end":2.195},{"word":"tanah.","start":2.195,"end":2.76}],
+  },
+  "p2": {
+    file: "vo/hujan-sore/p2.wav",
+    duration: 5.32,
+    words: [{"word":"kedua,","start":0.12,"end":0.775},{"word":"udara","start":0.775,"end":1.002},{"word":"hangat","start":1.002,"end":1.447},{"word":"dan","start":1.447,"end":1.738},{"word":"lembap","start":1.738,"end":2.151},{"word":"naik,","start":2.151,"end":2.571},{"word":"makin","start":2.571,"end":2.863},{"word":"tinggi","start":2.863,"end":3.162},{"word":"makin","start":3.162,"end":3.429},{"word":"dingin,","start":3.429,"end":3.923},{"word":"lalu","start":3.923,"end":4.157},{"word":"ngembun","start":4.157,"end":4.554},{"word":"jadi","start":4.554,"end":4.78},{"word":"awan.","start":4.78,"end":5.32}],
+  },
+  "p3": {
+    file: "vo/hujan-sore/p3.wav",
+    duration: 5.93,
+    words: [{"word":"ketiga,","start":0.12,"end":0.843},{"word":"awannya","start":0.843,"end":1.205},{"word":"numpuk","start":1.205,"end":1.639},{"word":"berjam-jam,","start":1.639,"end":2.362},{"word":"kayak","start":2.362,"end":2.724},{"word":"cucian","start":2.724,"end":3.206},{"word":"seminggu.","start":3.206,"end":3.946},{"word":"sore,","start":3.946,"end":4.283},{"word":"kepenuhan,","start":4.283,"end":5.015},{"word":"tumpah","start":5.015,"end":5.312},{"word":"deh.","start":5.312,"end":5.93}],
+  },
+  "data": {
+    file: "vo/hujan-sore/data.wav",
+    duration: 5.82,
+    words: [{"word":"data","start":0.12,"end":0.304},{"word":"tujuh","start":0.304,"end":0.487},{"word":"tahun","start":0.487,"end":0.874},{"word":"dari","start":0.874,"end":1.087},{"word":"tiga","start":1.087,"end":1.299},{"word":"puluh","start":1.299,"end":1.512},{"word":"satu","start":1.512,"end":1.725},{"word":"stasiun:","start":1.725,"end":2.672},{"word":"hujan","start":2.672,"end":2.894},{"word":"umumnya","start":2.894,"end":3.387},{"word":"memuncak","start":3.387,"end":3.948},{"word":"sore,","start":3.948,"end":4.47},{"word":"paling","start":4.47,"end":4.827},{"word":"jarang","start":4.827,"end":5.253},{"word":"pagi.","start":5.253,"end":5.82}],
+  },
+  "tapi": {
+    file: "vo/hujan-sore/tapi.wav",
+    duration: 3.73,
+    words: [{"word":"tapi","start":0.12,"end":0.299},{"word":"tiap","start":0.299,"end":0.838},{"word":"daerah","start":0.838,"end":1.197},{"word":"beda,","start":1.197,"end":1.735},{"word":"ada","start":1.735,"end":2.004},{"word":"yang","start":2.004,"end":2.453},{"word":"malam,","start":2.453,"end":2.992},{"word":"bahkan","start":2.992,"end":3.238},{"word":"dini","start":3.238,"end":3.484},{"word":"hari.","start":3.484,"end":3.73}],
+  },
+  "tips": {
+    file: "vo/hujan-sore/tips.wav",
+    duration: 3.2,
+    words: [{"word":"jadi","start":0.12,"end":0.24},{"word":"kalau","start":0.24,"end":0.67},{"word":"siang","start":0.67,"end":0.854},{"word":"terik","start":0.854,"end":1.173},{"word":"banget,","start":1.173,"end":1.652},{"word":"siapin","start":1.652,"end":2.011},{"word":"payung","start":2.011,"end":2.378},{"word":"buat","start":2.378,"end":2.625},{"word":"sore.","start":2.625,"end":3.2}],
+  },
+  "serius": {
+    file: "vo/hujan-sore/serius.wav",
+    duration: 3.99,
+    words: [{"word":"hujan","start":0.12,"end":0.402},{"word":"sore","start":0.402,"end":0.912},{"word":"sering","start":0.912,"end":1.132},{"word":"bawa","start":1.132,"end":1.422},{"word":"petir","start":1.422,"end":1.782},{"word":"dan","start":1.782,"end":2.065},{"word":"angin","start":2.065,"end":2.363},{"word":"kencang.","start":2.363,"end":3.014},{"word":"waspada","start":3.014,"end":3.523},{"word":"ya.","start":3.523,"end":3.99}],
+  },
+  "komen": {
+    file: "vo/hujan-sore/komen.wav",
+    duration: 3.21,
+    words: [{"word":"di","start":0.12,"end":0.12},{"word":"tempatmu","start":0.12,"end":0.685},{"word":"hujannya","start":0.685,"end":1.251},{"word":"jam","start":1.251,"end":1.463},{"word":"berapa?","start":1.463,"end":2.028},{"word":"tulis","start":2.028,"end":2.382},{"word":"di","start":2.382,"end":2.57},{"word":"komen.","start":2.57,"end":3.21}],
+  },
+};
