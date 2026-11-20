@@ -63,6 +63,8 @@ export type FaceState = {
   angry?: number;
   /** 0..1 syok berat: mata melotot, pupil mengecil, rahang jatuh, alis melonjak */
   shock?: number;
+  /** skala pupil (1 = normal, >1 melebar di gelap, <1 mengecil kena cahaya terang); dikalikan efek syok */
+  pupil?: number;
 };
 
 export type CartoonRig = {
@@ -577,6 +579,7 @@ export const applyFace = (rig: CartoonRig, face: FaceState = {}) => {
   const puff = c01(face.puff, 0);
   const angry = c01(face.angry, 0);
   const shock = c01(face.shock, 0);
+  const pupilK = Math.max(0.3, Math.min(2.2, face.pupil ?? 1));
 
   // mata: kesakitan → dipicingkan
   rig.eyes.forEach((e, i) => {
@@ -586,7 +589,7 @@ export const applyFace = (rig: CartoonRig, face: FaceState = {}) => {
     e.scale.y = Math.max(0.06, eyeOpen * (1 - pain * 0.75) * (1 - tw * 0.7)) * big;
     // pupil (anak ke-2 grup mata) mengecil saat syok
     const pupil = e.children[1];
-    if (pupil) pupil.scale.setScalar(1 - shock * 0.55);
+    if (pupil) pupil.scale.setScalar((1 - shock * 0.55) * pupilK);
   });
   rig.bags.opacity = bags * 0.75;
 

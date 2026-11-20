@@ -1,0 +1,14 @@
+{
+  "out": "public/vo/hp-gelap",
+  "module": "src/HpGelap/vo.generated.ts",
+  "clips": {
+    "hook": "kenapa sih nggak boleh main hape di tempat gelap? katanya bikin mata minus.",
+    "mitos": "tenang, minus belum terbukti. tapi ada tiga hal yang beneran terjadi.",
+    "p1": "pertama, mata kerja lembur. pupil melebar karena gelap, layarnya terang, mata jadi chepat lelah.",
+    "p2": "kedua, jarang kedip. mata fokus ke layar, jadi kering dan perih.",
+    "p3": "ketiga, susah tidur. cahaya layar menekan melatonin, hormon ngantuk.",
+    "twist": "eh, ada lagi. main hape sambil miring, satu mata ketutup bantal? mata itu bisa buta sementara, beberapa menit.",
+    "tips": "jadi nyalain lampu, turunin kecerahan, istirahatin mata. kalau kabur terus, cek ke dokter mata ya.",
+    "komen": "kamu tim main hape sampai ketiduran, atau tim hape di-charge jauh? tulis di komen."
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "out": "public/vo/upil-asin",
+  "module": "src/UpilAsin/vo.generated.ts",
+  "clips": {
+    "hook": "kenapa sih upil rasanya asin? jangan pura-pura nggak tahu.",
+    "janji": "jawabannya ada di ingus. upil itu ingus yang mengering.",
+    "p1": "pertama, ingus itu sembilan puluh lima persen air. sisanya musin, protein, dan garam.",
+    "p2": "kedua, garamnya penting. bikin lendir tetap encer dan bisa mengalir.",
+    "p3": "ketiga, ingus itu jebakan. debu dan kuman nempel, terus dilawan enzim antikuman.",
+    "twist": "eh, ada lagi. sebagian besar ingusmu ketelan tiap hari, tanpa sadar.",
+    "tips": "jadi jangan dikorek pakai jari, bisa luka dan mimisan. buang ingus pelan, pakai tisu.",
+    "dokter": "kalau sering berdarah, atau hijau kuning disertai demam, cek ke dokter ya.",
+    "komen": "kamu tim ngupil diam-diam, atau tim tisu? tulis di komen."
+  }
+}

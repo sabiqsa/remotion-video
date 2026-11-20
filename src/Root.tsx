@@ -14,6 +14,10 @@ import { FPS as GK_FPS, TOTAL_SECONDS as GK_TOTAL } from "./GigitKuku/script";
 import { NiupMakanan } from "./NiupMakanan";
 import { Inflasi } from "./Inflasi";
 import { FPS as IF_FPS, TOTAL_SECONDS as IF_TOTAL } from "./Inflasi/script";
+import { HpGelap } from "./HpGelap";
+import { FPS as HG_FPS, TOTAL_SECONDS as HG_TOTAL } from "./HpGelap/script";
+import { UpilAsin } from "./UpilAsin";
+import { FPS as UA_FPS, TOTAL_SECONDS as UA_TOTAL } from "./UpilAsin/script";
 import { LaparMarah } from "./LaparMarah";
 import { FPS as LM_FPS, TOTAL_SECONDS as LM_TOTAL } from "./LaparMarah/script";
 import { FPS as NM_FPS, TOTAL_SECONDS as NM_TOTAL } from "./NiupMakanan/script";
@@ -111,6 +115,22 @@ export const RemotionRoot: React.FC = () => {
         component={Inflasi}
         durationInFrames={Math.round(IF_TOTAL * IF_FPS)}
         fps={IF_FPS}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="HpGelap"
+        component={HpGelap}
+        durationInFrames={Math.round(HG_TOTAL * HG_FPS)}
+        fps={HG_FPS}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="UpilAsin"
+        component={UpilAsin}
+        durationInFrames={Math.round(UA_TOTAL * UA_FPS)}
+        fps={UA_FPS}
         width={1080}
         height={1920}
       />
