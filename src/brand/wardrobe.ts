@@ -6,7 +6,7 @@
 import * as THREE from "three";
 
 export type HairStyle = "bowl" | "comma" | "spiky" | "curly" | "side" | "ponytail" | "bald";
-export type Outfit = "tee" | "hoodie" | "shirt" | "jacket" | "doctor" | "bowtie";
+export type Outfit = "tee" | "hoodie" | "shirt" | "jacket" | "doctor" | "bowtie" | "dino" | "chef";
 export type Accessory =
   | "glasses_round"
   | "glasses_square"
@@ -14,7 +14,9 @@ export type Accessory =
   | "cap"
   | "mask"
   | "headphones"
-  | "stethoscope";
+  | "stethoscope"
+  | "dino_hood"
+  | "chef_hat";
 
 export type Wardrobe = {
   hair?: HairStyle;
@@ -23,7 +25,7 @@ export type Wardrobe = {
 };
 
 export const HAIR_STYLES: HairStyle[] = ["bowl", "comma", "spiky", "curly", "side", "ponytail", "bald"];
-export const OUTFITS: Outfit[] = ["tee", "hoodie", "shirt", "jacket", "doctor", "bowtie"];
+export const OUTFITS: Outfit[] = ["tee", "hoodie", "shirt", "jacket", "doctor", "bowtie", "dino", "chef"];
 export const ACCESSORIES: Accessory[] = [
   "glasses_round",
   "glasses_square",
@@ -32,6 +34,8 @@ export const ACCESSORIES: Accessory[] = [
   "mask",
   "headphones",
   "stethoscope",
+  "dino_hood",
+  "chef_hat",
 ];
 
 /** Warna baju bawaan tiap outfit (bisa ditimpa lewat `colors.shirt`). */
@@ -42,7 +46,12 @@ export const OUTFIT_COLORS: Record<Outfit, { main: string; accent: string }> = {
   jacket: { main: "#3b5b8f", accent: "#ffffff" },
   doctor: { main: "#fbfbfb", accent: "#7fd1c8" },
   bowtie: { main: "#f5b83d", accent: "#ffffff" },
+  dino: { main: "#5cc56b", accent: "#f6e7b0" },
+  chef: { main: "#fbfbf7", accent: "#e3263b" },
 };
+
+/** warna duri piyama dino (punggung, ekor, tudung) */
+export const DINO_SPIKE = "#ff9f1a";
 
 export const mat = (color: string, extra: Partial<THREE.MeshStandardMaterialParameters> = {}) =>
   new THREE.MeshStandardMaterial({ color, roughness: 0.6, ...extra });
@@ -162,6 +171,39 @@ export const buildHeadAccessories = (add: Add, K: number, list: Accessory[]) => 
       }
       add(new THREE.BoxGeometry(0.62 * K, 0.025 * K, 0.025 * K), frame, [0, 0.15, 0.47]);
       temples();
+    }
+    if (a === "dino_hood") {
+      // tudung piyama dino: cangkang hijau menutup kepala atas, duri oranye di garis tengah,
+      // dua mata dino bulat di depan atas, plus pipi tudung sampai ke samping wajah
+      const g = mat("#5cc56b", { roughness: 0.75, side: THREE.DoubleSide });
+      add(new THREE.SphereGeometry(0.53 * K, 40, 20, 0, Math.PI * 2, 0, Math.PI * 0.47), g, [0, 0.02, -0.02], [1, 1, 1], [-0.32, 0, 0]);
+      add(new THREE.TorusGeometry(0.44 * K, 0.05 * K, 12, 40), g, [0, 0.14, 0.2], [1, 1, 1], [-0.95, 0, 0]);
+      const spike = mat(DINO_SPIKE, { roughness: 0.5 });
+      [
+        [0.5, 0.14, 0.3],
+        [0.53, -0.04, 0.32],
+        [0.43, -0.24, 0.26],
+        [0.25, -0.42, 0.2],
+      ].forEach(([y, z, h], i) => {
+        add(new THREE.ConeGeometry(0.075 * K, h * K, 16), spike, [0, y, z], [0.55, 1, 1], [-0.25 - i * 0.45, 0, 0]);
+      });
+      const white = mat("#ffffff", { roughness: 0.3 });
+      const black = mat("#1b1b1f", { roughness: 0.2 });
+      for (const s of [-1, 1]) {
+        add(new THREE.SphereGeometry(0.075 * K, 18, 14), white, [s * 0.15, 0.47, 0.25]);
+        add(new THREE.SphereGeometry(0.038 * K, 14, 10), black, [s * 0.15, 0.48, 0.32]);
+      }
+    }
+    if (a === "chef_hat") {
+      // topi koki: pita putih melingkar di dahi + "jamur" gembung dari 7 bola di atasnya
+      const w = mat("#ffffff", { roughness: 0.85 });
+      add(new THREE.CylinderGeometry(0.43 * K, 0.45 * K, 0.2 * K, 40, 1, true), mat("#f3f3ef", { roughness: 0.85, side: THREE.DoubleSide }), [0, 0.36, -0.03], [1, 1, 1], [-0.12, 0, 0]);
+      add(new THREE.SphereGeometry(0.4 * K, 32, 20), w, [0, 0.62, -0.08], [1.08, 0.7, 1.02]);
+      for (let i = 0; i < 6; i++) {
+        const ang = (i / 6) * Math.PI * 2;
+        add(new THREE.SphereGeometry(0.2 * K, 20, 14), w, [Math.cos(ang) * 0.27, 0.66, Math.sin(ang) * 0.24 - 0.08]);
+      }
+      add(new THREE.SphereGeometry(0.22 * K, 20, 14), w, [0, 0.8, -0.08]);
     }
     if (a === "cap") {
       const c = mat("#e3263b", { roughness: 0.7, side: THREE.DoubleSide });

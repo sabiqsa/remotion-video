@@ -16,7 +16,7 @@ Panduan membuat video Remotion yang konsisten dengan brand @day.one.eight dan ti
    - aset yang dibutuhkan dan fallback-nya.
    Pertanyaan yang benar-benar terbuka ditanyakan di tahap ini, bukan di tengah coding. Kalau user minta ide/riset referensi, boleh riset singkat dan sebutkan sumbernya.
 2. **Siapkan fondasi** (sekali per proyek). Pastikan file ini ada; kalau belum, salin dari `assets/` skill ini:
-   - `src/lib/motion.ts`, `src/brand/WordText.tsx`, `src/brand/SourceWatermark.tsx`, `src/brand/HandleWatermark.tsx`, `src/brand/HandleDecal.tsx`, `src/brand/Character3D.tsx` + `src/brand/cartoonBody.ts` + `src/brand/wardrobe.ts`, `src/brand/BrandClosingPixel.tsx` (+ `BrandClosing.tsx`, karena konstanta brand diimpor dari sana)
+   - `src/lib/motion.ts`, `src/brand/WordText.tsx`, `src/brand/SourceWatermark.tsx`, `src/brand/HandleWatermark.tsx`, `src/brand/HandleDecal.tsx`, `src/brand/BrandTag.tsx`, `src/brand/Character3D.tsx` + `src/brand/cartoonBody.ts` + `src/brand/wardrobe.ts`, `src/brand/BrandClosingPixel.tsx` (+ `BrandClosing.tsx`, karena konstanta brand diimpor dari sana)
    - `public/logo.png`, `public/sfx/click.wav`, `public/models/ual/UAL1_Standard.glb`
    - dependency: `npx remotion add @remotion/google-fonts @remotion/media` (dan `@remotion/three` bila pakai 3D)
 3. **Bangun komposisi** di `src/<NamaVideo>/` dengan `script.ts` (naskah + timeline dalam detik) terpisah dari komponen visual, supaya teks mudah direvisi.
@@ -31,6 +31,11 @@ Panduan membuat video Remotion yang konsisten dengan brand @day.one.eight dan ti
    ```bash
    npx remotion still <Id> out/<NN>-<nama>/cover.png --frame=<COVER_AT×60> --image-format=png
    ```
+   **Cek judul upload sebelum cover dikunci** (skill `yt-package`, profil suara di `.claude/youtube/voice.md`). Tulis beberapa calon judul + teks hook layar, lalu lint sebagai pasangan:
+   ```bash
+   python3 .claude/skills/yt-package/title.py --title "Kenapa Harga Barang Naik Terus? 😱💸" --thumb "naik terus?"
+   ```
+   Perhatikan batas 40 karakter (feed mobile) dan saran "no-number". Peringatan "duplicate" boleh diabaikan karena aturan cover kita memang judul = teks hook. Skor `yt-script/hookscore.py` dikalibrasi untuk bahasa Inggris, jadi pakai daftar 21 rumusnya (`yt-script/hooks.json`) sebagai inspirasi hook, bukan skornya sebagai patokan. Untuk cari topik berikutnya, pakai `yt-viral`.
 
 ## Spesifikasi format
 
@@ -40,7 +45,7 @@ Panduan membuat video Remotion yang konsisten dengan brand @day.one.eight dan ti
 | FPS | **60** |
 | Codec saran | H.264, CRF 18 |
 | Safe zone | atas 150px, bawah 380px, kanan 140px, kiri 80px (UI TikTok/Reels menutupi area ini) |
-| Durasi | **50–59 detik** total (termasuk closing 4 dtk → konten ±46–55 dtk) — preferensi channel. Narasi Voicebox ±13 karakter/dtk + jeda ±0.65 dtk per scene; bila lewat, pangkas naskah (jangan percepat tempo). Isi dengan poin + komedi, bukan jeda kosong |
+| Durasi | **maksimal 50 detik** total (termasuk closing 4 dtk → konten ≤46 dtk; sasaran 46–50 dtk) — preferensi channel, menggantikan aturan lama 50–59 dtk. Narasi Voicebox ±13 karakter/dtk + jeda ±0.65 dtk per scene; bila lewat, pangkas naskah (jangan percepat tempo). Isi dengan poin + komedi, bukan jeda kosong |
 | Audio | **−14 LUFS** terintegrasi, true peak **≤ −1.5 dBTP**, AAC 320 kbps (`--audio-bitrate=320k`). Lebih pelan dari itu → TikTok menaikkan volume & menekan puncak → kresek. |
 
 Tulis semua waktu dalam **detik** dan konversi dengan `sec(detik, fps)`. Angka frame mentah yang ditulis untuk 30fps akan jadi dua kali lebih cepat di 60fps.
@@ -90,12 +95,14 @@ Konten edukasi lebih ditonton sampai habis & dikomentari bila ada momen interakt
 - **Kuis tebak-tebakan**: pertanyaan di narasi → kartu A/B → scene tanpa narasi berisi hitung mundur 3-2-1 (+ `tick`) → jawaban dibuka (+ `ding`), opsi salah dicoret & redup, opsi benar kuning + ✓. Kartu hilang ±1.8 dtk setelah jawaban agar tidak menabrak teks.
 - **Ajakan komen** sebelum closing: "kamu tim X atau tim Y?" + dua tombol pil + "tulis di komen 👇"; siapkan juga **komentar yang di-pin** di `caption.md`.
 - **Pergantian nada**: candaan berhenti saat info serius ("nah, yang ini serius") — tokoh komedi menghilang, wajah si biru khawatir, ikon peringatan muncul.
-- **Efek suara komedi** dari `scripts/make_sfx_comedy.py` (tanpa dependency): `whoosh`, `thud`, `boing`, `burp` (pop lucu), `srek`, `tick`, `ding`, `pop`, `slurp` ("sruput" sedotan) — puncak −6 dBFS, volume 0.35–0.9, dipasang di ketukan lewat daftar `SFX` di `src/<Video>/sfx.ts` (file tanpa React, supaya bisa di-bundle esbuild untuk verifikasi terukur). `whoosh` (noise rendah) mudah menjumlah dengan narasi jadi puncak tinggi; bila true peak lewat, turunkan volumenya atau ganti `boing`.
+- **Efek suara komedi** dari `scripts/make_sfx_comedy.py` (tanpa dependency): `whoosh`, `thud`, `boing`, `burp` (pop lucu), `srek`, `tick`, `ding`, `pop`, `slurp` ("sruput" sedotan), `rain`, `thunder`, `drip`, `coin`, `buzz`, `twitch`, `glint`, `rocket`, `crunch`, `squish`, `blow` (tiup "fuuuh"), `sneeze` ("ha-CHI!"), `steam` (desis uap), `growl` (perut keroncongan "krucuk~"), `huff` (dengus kesal "hmph!"), `sting` (hentakan syok "DUN!" sub-bass, untuk momen kaget dramatis), `kaching` (mesin kasir, harga naik) — puncak −6 dBFS, volume 0.35–0.9, dipasang di ketukan lewat daftar `SFX` di `src/<Video>/sfx.ts` (file tanpa React, supaya bisa di-bundle esbuild untuk verifikasi terukur). `whoosh` (noise rendah) mudah menjumlah dengan narasi jadi puncak tinggi; bila true peak lewat, turunkan volumenya atau ganti `boing`.
 - Semua ketukan dikumpulkan di satu objek `BEATS` di `src/<Video>/beats.ts` (detik absolut, dari `beat(scene, kataNarasi, fallback, after?)`) yang dipakai bersama oleh scene 3D, overlay, dan SFX — jadi ikut bergeser otomatis saat voiceover masuk. Kata pemicu dicocokkan dengan **awalan**: "b" juga cocok dengan "berapa", jadi pakai argumen `after` (mis. cari "B" setelah waktu "A") untuk kata pendek.
 - **Jangkar ketukan ke kata yang tepat**, bukan ke awal scene: efek yang menggambarkan kata harus jatuh *di* kata itu (bersin setelah "flu", retak saat "turun", ding saat "B", kerok saat "kerokan", duduk saat "duduk"). Setelah VO masuk, cetak tabel "ketukan → kata yang sedang diucapkan" dari `meta.json` dan perbaiki yang meleset.
 - **Efek suara harus terdengar di atas narasi**: bunyi pendek/tipis (pop) tenggelam. Pakai `pop` versi "bloop" (dua nada + badan rendah), volume efek 0.7–1.0 × `SFX_GAIN`, dan **ducking** narasi (`voDuck`: −4 dB selama 0.25 dtk di setiap efek, lewat `volume={(f) => …}` pada `<Audio>` narasi).
 - **Preview Studio**: `prefetch()` semua file audio (efek + VO) di komponen komposisi supaya bunyi pertama tidak telat/terlewat. Waktu di hasil render sendiri presisi.
 - **Verifikasi terukur** (tanpa render video): `npx remotion render <Id> /tmp/a.wav --codec=wav`, lalu cross-correlation tiap file efek & awal klip VO terhadap audio render (target: geser ≤ ±10 ms, korelasi ≥ 0.5; korelasi < 0.3 = bunyi tertutup), plus ukur LUFS/true peak (target −14 LUFS, ≤ −1.5 dBTP; turunkan `SFX_GAIN` bila puncak lewat).
+
+- **Dolly zoom (vertigo) untuk momen syok** (`src/Inflasi/Scene3D.tsx`): `Pose` punya `fov`; macro wajah mulai jauh + lensa sempit (snap zoom), lalu kamera maju sambil FOV melebar dengan `fov = 2·atan(dRef·tan(FOV/2)/d)` sehingga wajah tetap seukuran dan latar "tertarik". Proyeksi overlay (`toScreen`) wajib memakai FOV pose yang sama. Elemen 2D di hook jangan dikunci ke posisi layar benda yang ikut membesar saat macro (bisa menutup mata) — taruh di posisi tetap di luar wajah.
 
 ## Gerak anti-generik
 
@@ -140,7 +147,7 @@ Script pertama generate tiap klip (async → poll `/history/{id}` → `export-au
 
 Alternatif: user membuat suara sendiri di tool TTS pihak ketiga dari transkrip `voiceover.md` (lalu langkah 3–7 di bawah), atau ElevenLabs API via `make_voiceover.mjs` bila ada API key.
 
-1. **Naskah narasi** di `scripts/voiceover/<video>.json` (`out`, `module`, `clips` per scene). Narasi closing tidak perlu — sudah bawaan `BrandClosingPixel`. Kalimat lebih mengalir dari teks layar, angka ditulis dengan huruf, handle dieja "day one eight". Masukkan ke rencana review.
+1. **Naskah narasi** di `scripts/voiceover/<video>.json` (`out`, `module`, `clips` per scene). Narasi closing tidak perlu — sudah bawaan `BrandClosingPixel`. Kalimat lebih mengalir dari teks layar, angka ditulis dengan huruf, handle dieja "day one eight". Masukkan ke rencana review. **Huruf "c" Indonesia**: Voicebox mode `en` membacanya "k" ("pemicu" → "pemiku", "cari" → "kari"). Setelah generate, cek transkrip whisper untuk kata ber-c; bila salah, tulis "ch" di naskah narasi ("pemichunya", "chari") lalu generate ulang klip itu saja (`--only`). Kata yang sudah terbaca benar (mis. "cemas", "camilan") biarkan. **Huruf "e" pepet**: TTS bisa membaca "e" pepet jadi "eu" (mis. "beli" → "beuli"). Perbaiki hanya kata yang dikeluhkan user: buang "e"-nya ("beli" → "bli"). Jangan tulis "eu" ("beuli" malah terbaca "boli"). Bila ragu, buat 3–4 varian ejaan ke `out/voice-test/` (config dengan `"out": "out/voice-test/<kata>"`) dan biarkan user memilih lewat telinga; whisper tidak bisa membedakan pepet vs "eu".
 2. **Transkrip untuk user**: `src/<Video>/voiceover.md` — tabel nama file + teks per klip, pengaturan (bahasa Indonesia, santai, tempo normal–cepat, tanpa musik), dan blok **teks polos**. Tulis jelas di atas: *tempel hanya teks narasi, jangan seluruh file* (pernah terjadi seluruh md ikut terbaca → audio 4 menit).
 3. **User mengirim audio**: per klip (`<id>.wav/mp3/m4a` di `public/vo/<video>/`) atau satu file panjang.
 4. **Transkripsi lokal** (whisper.cpp 1.5.5 + model `small`, tanpa cmake, ±560 MB di `whisper.cpp/` yang di-.gitignore; minta izin sebelum pemasangan pertama):
@@ -178,23 +185,33 @@ Kredit sumber ditampilkan sebagai **watermark kecil yang diam sepanjang konten**
 - Untuk topik kesehatan/keuangan/hukum, tandai klaim yang belum pasti di scene-nya.
 - `SourceCard` (kartu terpisah) masih tersedia di `assets/` bila user memintanya.
 
-## Watermark anti re-upload (wajib)
+## Watermark anti re-upload (wajib, standar sejak video 06)
 
-Setiap video diberi dua lapis watermark **@day.one.eight** supaya sulit diunduh lalu di-upload ulang tanpa jejak:
+Setiap video wajib punya **empat lapis** watermark **@day.one.eight** supaya sulit diunduh lalu di-upload ulang tanpa jejak, dan tetap terbaca di latar terang maupun gelap. Contoh lengkap: `src/HoaksViral/`.
 
-1. **`HandleWatermark`** — ikon logo + handle (Helvetica 30px semibold, putih 40%) yang **melompat** ke titik aman berikutnya setiap pergantian scene, lalu diam (bukan melayang). Tampil sepanjang konten, tidak di closing.
+1. **`HandleWatermark`**: ikon logo + handle (Helvetica 30px semibold) di atas **pill gelap transparan** (default `pill`, opacity 0.75). Label ini **melompat** ke titik aman berikutnya setiap pergantian scene, lalu diam (bukan melayang). Tampil sepanjang konten, tidak di closing.
    ```tsx
    <Sequence durationInFrames={sec(contentSeconds, fps)} layout="none">
      <SourceWatermark name="alodokter.com" />
-     <HandleWatermark cuts={SCENES.map((s) => s.start)} />
+     <HandleWatermark cuts={SCENES.map((s) => s.start)} spots={[
+       { left: 90, top: 1180 }, { right: 160, top: 1500 }, { right: 160, top: 1180 }, { left: 90, top: 1500 },
+     ]} />
    </Sequence>
    ```
-   Titik default (`DEFAULT_WATERMARK_SPOTS`): kiri-tengah `top 870`, kanan `top 1250`, kiri-bawah `top 1460` — di luar area teks, penanda n/5, dan UI TikTok. Sesuaikan bila layout video berbeda; cek dengan still bahwa watermark tidak menutupi teks.
-2. **`HandleDecal`** — stiker kuning @day.one.eight **di dalam scene 3D** (mis. panel depan meja), ikut perspektif kamera sehingga tidak bisa di-crop tanpa memotong isi:
-   ```tsx
-   <HandleDecal position={[0, tableTop - 0.24, 1.43]} width={1.0} />
-   ```
-   Untuk video tanpa 3D, taruh handle di elemen utama (kartu, ilustrasi) sebagai pengganti.
+   - Pakai **minimal 4 titik** yang menyebar kiri/kanan dan tengah/bawah. Default (`DEFAULT_WATERMARK_SPOTS`) juga berisi 4 titik.
+   - Titik harus di luar area teks (`top` 320–±620), di luar panel interaktif (±620–1100), dan di luar UI TikTok (kanan 140, bawah 380).
+   - Cek dengan still di **setiap scene** bahwa label tidak menabrak panel, balon teks, atau wajah.
+2. **`HandleDecal` di scene 3D (minimal 3 stiker)**: stiker kuning @day.one.eight yang ikut perspektif kamera, sehingga tidak bisa di-crop tanpa memotong isi.
+   - **Wajib**: **panel depan meja** (atau benda utama di bawah karakter), karena hampir selalu masuk frame:
+     ```tsx
+     <mesh position={[0, TABLE_TOP - 0.2, DESK_Z + 0.44]}><boxGeometry args={[2.2, 0.26, 0.04]} />…</mesh>
+     <HandleDecal position={[0.45, TABLE_TOP - 0.2, DESK_Z + 0.465]} width={0.62} />
+     ```
+   - Plus minimal dua lagi di set: poster atau papan tulis di dinding (cukup besar, `width ≥ 0.7`, dan pastikan masuk frame), punggung laptop, sampul buku, dada robot, atau baju di jemuran.
+   - Untuk video tanpa 3D, taruh handle di elemen utama (kartu, ilustrasi) sebagai pengganti.
+3. **`BrandTag` di panel interaktif**: teks kecil "@day.one.eight" (24px, putih 70%) yang menempel di pojok kanan-bawah setiap panel grafik/data, di bawah emosi-meter atau kedut-meter, di bawah checklist, dan di bawah tombol komen. Komponen: `src/brand/BrandTag.tsx` (`BrandTag` + `BRAND_TAG_CORNER`; salinan di `assets/BrandTag.tsx`).
+   - **Jangan** menempelkan handle pada konten negatif (kartu hoaks, contoh pesan penipuan, dsb.), supaya brand tidak terkesan ikut menyebarkannya.
+4. **Kredit di letterbox**: saat kamera macro dengan letterbox, tampilkan `BrandTag` di tengah bar hitam bawah (ala kredit film), dengan opacity mengikuti tinggi bar.
 
 ## Karakter default: "si biru" (kartun di atas rig Mannequin)
 
@@ -220,15 +237,15 @@ import { BoneOverride, Character3D } from "../brand/Character3D";
   - mata `eyeOpen` (kedip di daftar waktu tetap), alis `sleepy` (turun), `sad` (ujung dalam naik, khawatir), `surprise` (naik)
   - mulut `smile`, `frown` (cemberut), `open` (mulut "O": kaget/"waduh"/"ah—"), `yawn` (menguap), `pain` (meringis: gigi terlihat + mata dipicingkan)
   - warna `pale` (kulit & **bibir pucat** saat sakit), `blush` (merona malu/senang), `sweat` (tetes keringat)
-  - `twitchL` (kelopak **kiri** menyempit + alis kiri turun = kedutan; mainkan per ketukan: sempit 0.03 dtk → buka 0.09 dtk, rentetan 3× berjarak 0.11 dtk = sama dengan sfx `twitch`), `bags` (kantung mata gelap, kurang tidur)
+  - `twitchL` (kelopak **kiri** menyempit + alis kiri turun = kedutan; mainkan per ketukan: sempit 0.03 dtk → buka 0.09 dtk, rentetan 3× berjarak 0.11 dtk = sama dengan sfx `twitch`), `bags` (kantung mata gelap, kurang tidur), `buck` (dua gigi depan besar ala kelinci — menggigit/nyengir lucu, contoh di `src/GigitKuku/`), `puff` (meniup "fuuuh": pipi menggembung + bibir monyong bulat, menggantikan mulut lain; contoh `src/NiupMakanan/` — sendok ditaruh ±0.17 di bawah & 0.3 di depan mulut supaya bibir monyong tetap terlihat saat macro), `angry` (marah/kesal: alis menukik ke dalam, wajah memerah, tanda urat 💢 merah di dahi kanan muncul >0.3; padukan dengan `frown` ±0.9, uap kepala sekali per ledakan, dan sfx `huff`; contoh `src/LaparMarah/`), `shock` (syok berat: bola mata membesar 1.3×, pupil mengecil, rahang jatuh lonjong, alis melonjak; padukan dengan `surprise` 1, `sweat` 0.8, `pale` ±0.35, sfx `sting`, kilat putih 0.22 dtk + garis konsentrasi manga di sekitar wajah. Pakai rambut yang tidak menutupi dahi/mata (mis. `spiky`) — `comma` menutupi mata kanan saat macro. Contoh `src/Inflasi/`)
   - Resep: sakit = `pale .55 + sad .55 + frown .35`; kaget = `open .85 + surprise 1 + sweat .8`; malu = `smile .35 + blush 1 + sweat .6`; kesakitan = `pain 1 + sweat 1`; khawatir = `sad .9 + frown .7 + pale .7`; senang = `smile 1 + blush .6`.
   - Lihat semua di still `FaceSheet` (folder Brand) sebelum memilih nilai.
 - **Kamera macro** (contoh `src/MataKedutan/`): kanvas 3D penuh 1080×1920 dengan `camera.setViewOffset(1080, 2520, 0, 0, 1080, 1920)` + fov 66.6 → pose kamera gaya lama (kanvas mulai `top: 600`) tetap berlaku. Zoom ke mata: dorong 0.3 dtk `EASE.inOut` ke ±0.24 di depan mata, tahan, tarik keluar 0.45–0.6 dtk; tambah letterbox + vignette + blur tepi (`backdrop-filter` bermasker radial) selama macro. Mata kartun berdiameter ±0.06 pada `scale 1.75`; ukur posisinya dari still (triangulasi dua sudut + ukuran di layar), dan beri geser per zoom bila pose kepala sedang berubah (tersentak/condong).
 - **Warna** bisa diganti lewat `colors={{ shirt, pants, skin, hair, shoes, collar }}` (mis. variasi tokoh kedua), tapi default tetap si biru.
 - **Wardrobe** (`wardrobe={{ hair, outfit, accessories }}`, semua dibangun dari kode di `wardrobe.ts` + `cartoonBody.ts`, boleh diganti per scene/tokoh). Lihat still `WardrobeSheet` (folder Brand) atau `assets/wardrobe-katalog.jpg` sebelum memilih:
   - `hair`: `bowl` (default), `comma` (comma hair), `spiky`, `curly`, `side`, `ponytail`, `bald`; warnanya ikut `colors.hair`.
-  - `outfit`: `tee` (default), `hoodie` (tudung, tali, saku kanguru, rib), `shirt` (kemeja putih lengan panjang), `jacket`, `doctor` (jas dokter + scrub), `bowtie` (baju mustard + kerah putih + dasi kupu-kupu merah). Warna bawaan di `OUTFIT_COLORS`; `colors.shirt` menimpanya.
-  - `accessories`: `glasses_round`, `glasses_square`, `sunglasses`, `cap`, `mask`, `headphones`, `stethoscope` (pasangkan dengan `outfit: "doctor"`).
+  - `outfit`: `tee` (default), `hoodie` (tudung, tali, saku kanguru, rib), `shirt` (kemeja putih lengan panjang), `jacket`, `doctor` (jas dokter + scrub), `bowtie` (baju mustard + kerah putih + dasi kupu-kupu merah), `dino` (piyama dino hijau: perut krem, duri oranye di punggung, ekor; pasangkan `colors={{ pants: "#5cc56b", shoes: "#ff9f1a" }}` agar celana ikut hijau), `chef` (baju koki putih: dua baris kancing + saputangan leher merah, tanpa kerah; contoh `src/NiupMakanan/`). Warna bawaan di `OUTFIT_COLORS`; `colors.shirt` menimpanya.
+  - `accessories`: `glasses_round`, `glasses_square`, `sunglasses`, `cap`, `mask`, `headphones`, `stethoscope` (pasangkan dengan `outfit: "doctor"`), `dino_hood` (tudung dino bermata + duri; pasangkan dengan `outfit: "dino"`), `chef_hat` (topi koki gembung; pasangkan dengan `outfit: "chef"`).
   - Contoh: `wardrobe={{ hair: "comma", outfit: "hoodie", accessories: ["glasses_round"] }}`. Item baru dibuat dengan bentuk dasar three.js (bukan model unduhan) supaya gayanya tetap sama; cek tiap item baru dengan still close-up karena kepala besar menutupi area leher/dada atas — detail dada taruh ≥0.07 di bawah `neck_01` dan sedikit di depan permukaan badan.
 - **Klip** (43 tersedia di `UAL1_Standard.glb`): `Idle_Loop`, `Idle_Talking_Loop`, `Sitting_Enter`, `Sitting_Idle_Loop`, `Sitting_Talking_Loop`, `Sitting_Exit`, `Walk_Loop`, `Walk_Formal_Loop`, `Jog_Fwd_Loop`, `Sprint_Loop`, `Interact`, `PickUp_Table`, `Hit_Head`, `Dance_Loop`, `Jump_*`, `Crouch_*`, `Push_Loop`, `Roll`, `Driving_Loop`, `Fixing_Kneeling`, dll. Waktu klip dihitung dari detik video (deterministik). Ganti klip dengan segmen baru + `fade`.
 - **Pose override** (`bones`, radian, ditambahkan di atas klip). Arah yang sudah diuji:
@@ -298,7 +315,7 @@ Karakter/objek 3D via `@remotion/three` + react-three-fiber; set `Config.setChro
 | `assets/wardrobe.ts` | `src/brand/wardrobe.ts` | Rambut, aksesori kepala, warna outfit (tipe `Wardrobe`) |
 | `assets/WardrobeSheet.tsx` | `src/brand/WardrobeSheet.tsx` | Still katalog wardrobe 2400×1800 (daftarkan di Root, folder Brand) |
 | `assets/wardrobe-katalog.jpg` | — | Gambar referensi katalog wardrobe |
-| `assets/scripts/make_sfx_comedy.py` | `scripts/make_sfx_comedy.py` | Generator 8 efek suara komedi |
+| `assets/scripts/make_sfx_comedy.py` | `scripts/make_sfx_comedy.py` | Generator efek suara komedi (`python3 scripts/make_sfx_comedy.py growl huff` → hanya file itu) |
 | `assets/ChannelArt.tsx` | `src/brand/ChannelArt.tsx` | Banner, foto profil, watermark channel YouTube |
 | `assets/models/UAL1_Standard.glb` | `public/models/ual/UAL1_Standard.glb` | Mannequin + 43 animasi (CC0, Quaternius), sertakan `LICENSE.txt` |
 | `assets/SourceCard.tsx` | `src/brand/SourceCard.tsx` | Kartu sumber terpisah (alternatif) |

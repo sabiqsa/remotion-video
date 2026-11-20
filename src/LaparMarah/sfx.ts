@@ -1,0 +1,37 @@
+// Daftar efek suara (dipisah dari komponen supaya bisa dicek terukur tanpa React).
+import { BEATS } from "./beats";
+
+/** Efek suara: [detik, file, volume]. Puncak file −6 dBFS; narasi di-duck saat efek berbunyi. */
+export const SFX: [number, string, number][] = [
+  [BEATS.growl0, "growl", 0.6],
+  [BEATS.angry0 - 0.2, "whoosh", 0.2],
+  [BEATS.angry0, "huff", 0.55],
+  [BEATS.angry0 + 0.1, "steam", 0.35],
+  [BEATS.calm0 + 0.15, "whoosh", 0.25],
+  [BEATS.growl1, "growl", 0.55],
+  [BEATS.sugar, "tick", 0.5],
+  [BEATS.brain - 0.25, "whoosh", 0.3],
+  [BEATS.brain + 0.3, "buzz", 0.35],
+  [BEATS.weak, "boing", 0.35],
+  [BEATS.cort, "pop", 0.6],
+  [BEATS.adren, "pop", 0.6],
+  [BEATS.adren + 0.35, "thud", 0.5],
+  [BEATS.adren + 0.75, "thud", 0.5],
+  [BEATS.snap, "huff", 0.6],
+  [BEATS.snap + 0.05, "steam", 0.35],
+  [BEATS.study, "pop", 0.6],
+  [BEATS.during - 0.2, "whoosh", 0.3],
+  [BEATS.days, "srek", 0.5],
+  [BEATS.data, "pop", 0.5],
+  [BEATS.third, "ding", 0.28],
+  [BEATS.open, "pop", 0.55],
+  [BEATS.bite - 0.35, "whoosh", 0.3],
+  [BEATS.bite, "crunch", 0.5],
+  [BEATS.relief, "ding", 0.35],
+  [BEATS.tick1, "click", 0.7],
+  [BEATS.tick2, "click", 0.7],
+  [BEATS.tick3, "click", 0.7],
+  [BEATS.tick3 + 0.05, "ding", 0.4],
+  [BEATS.teamA, "click", 0.9],
+  [BEATS.teamB, "click", 0.9],
+];

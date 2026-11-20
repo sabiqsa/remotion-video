@@ -1,0 +1,16 @@
+{
+  "out": "public/vo/hoaks-viral",
+  "module": "src/HoaksViral/vo.generated.ts",
+  "clips": {
+    "hook": "kenapa hoaks lebih cepat viral daripada fakta? faktanya masih pakai sepatu.",
+    "ehem": "ehem, ini ada penelitiannya.",
+    "data": "studi MIT ke seratus dua puluh enam ribu kabar: hoaks tujuh puluh persen lebih mungkin di-retweet.",
+    "cepat": "fakta butuh waktu enam kali lebih lama buat nyampe ke seribu lima ratus orang.",
+    "p1": "pertama, hoaks terasa baru dan mengejutkan. otak kita doyan yang baru.",
+    "p2": "kedua, bikin emosi, kaget dan jijik. yang bikin baper, lebih gampang dibagi.",
+    "p3": "ketiga, yang nyebarin itu manusia, bukan bot. iya, kita.",
+    "twist": "eh, tunggu. kayak kenal pola ini.",
+    "tips": "jadi sebelum share, cek sumbernya, cek tanggalnya, dan cari di situs cek fakta. baru deh share.",
+    "komen": "kamu pernah ketipu hoaks apa? jujur aja, tulis di komen."
+  }
+}

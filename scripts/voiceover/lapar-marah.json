@@ -1,0 +1,14 @@
+{
+  "out": "public/vo/lapar-marah",
+  "module": "src/LaparMarah/vo.generated.ts",
+  "clips": {
+    "hook": "lagi lapar, tiba-tiba gampang kesal? tenang, bukan kamu jahat kok.",
+    "ehem": "ternyata, ini ada penjelasan ilmiahnya.",
+    "p1": "pertama, gula darah turun. otak bagian pengendali emosi butuh energi, jadi rem kesabaran ikut melemah.",
+    "p2": "kedua, tubuh melepas hormon kortisol dan adrenalin buat menaikkan gula darah. efeknya, kamu lebih gampang tersulut.",
+    "p3": "ketiga, ada penelitian pada enam puluh empat orang selama dua puluh satu hari: rasa lapar berkaitan dengan sepertiga rasa kesal dan marah.",
+    "twist": "jadi, yang marah sebenarnya perutmu, bukan hatimu.",
+    "tips": "sedia chamilan, makan teratur, dan sadari: aku lagi lapar, bukan lagi kesal.",
+    "komen": "kamu tipe lapar diam, atau lapar ngamuk? tulis di komen ya."
+  }
+}

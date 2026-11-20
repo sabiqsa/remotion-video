@@ -15,3 +15,12 @@ Proyek Remotion untuk konten video vertikal akun @day.one.eight.
 - `src/brand/` — komponen brand bersama (`BrandClosingPixel`, `WordText`, `SourceWatermark`, `HandleWatermark`, `HandleDecal`, `Character3D`).
 - `public/models/` — model 3D CC0 (Quaternius); karakter default = "si biru" kartun di atas rig Mannequin.
 - `src/Root.tsx` — daftar komposisi.
+
+## Skill tambahan (`.claude/skills/`)
+
+Aturan kerja di atas dan skill `remotion-video` selalu menang bila bertentangan dengan skill lain.
+
+- `remotion-best-practices` (resmi Remotion, v4.0.545): referensi API/markup/caption/render. Abaikan anjurannya membuka Studio sendiri (user menjalankan Studio di port 3001) dan tetap jangan render tanpa diminta.
+- `gsap-core` / `gsap-timeline` / `gsap-utils`: hanya sebagai referensi easing & susunan timeline. GSAP tidak dipasang di proyek; animasi Remotion wajib digerakkan `useCurrentFrame()`. Bila suatu saat memakai GSAP, timeline harus `paused: true` lalu `tl.seek(frame / fps)` tiap frame, tanpa tween berbasis waktu nyata.
+- `auto-editor*`: memotong hening/diam dari rekaman (butuh CLI `auto-editor`).
+- `yt-*`: paket YouTube (judul, SEO, komentar, riset viral). Profil suara di `.claude/youtube/voice.md`.

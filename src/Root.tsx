@@ -7,6 +7,16 @@ import { HujanSore } from "./HujanSore";
 import { FPS as HS_FPS, TOTAL_SECONDS as HS_TOTAL } from "./HujanSore/script";
 import { MataKedutan } from "./MataKedutan";
 import { FPS as MK_FPS, TOTAL_SECONDS as MK_TOTAL } from "./MataKedutan/script";
+import { HoaksViral } from "./HoaksViral";
+import { FPS as HV_FPS, TOTAL_SECONDS as HV_TOTAL } from "./HoaksViral/script";
+import { GigitKuku } from "./GigitKuku";
+import { FPS as GK_FPS, TOTAL_SECONDS as GK_TOTAL } from "./GigitKuku/script";
+import { NiupMakanan } from "./NiupMakanan";
+import { Inflasi } from "./Inflasi";
+import { FPS as IF_FPS, TOTAL_SECONDS as IF_TOTAL } from "./Inflasi/script";
+import { LaparMarah } from "./LaparMarah";
+import { FPS as LM_FPS, TOTAL_SECONDS as LM_TOTAL } from "./LaparMarah/script";
+import { FPS as NM_FPS, TOTAL_SECONDS as NM_TOTAL } from "./NiupMakanan/script";
 import { KopiNgantuk } from "./KopiNgantuk";
 import { FPS as KN_FPS, TOTAL_SECONDS as KN_TOTAL } from "./KopiNgantuk/script";
 import { MasukAngin } from "./MasukAngin";
@@ -61,6 +71,46 @@ export const RemotionRoot: React.FC = () => {
         component={MataKedutan}
         durationInFrames={Math.round(MK_TOTAL * MK_FPS)}
         fps={MK_FPS}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="HoaksViral"
+        component={HoaksViral}
+        durationInFrames={Math.round(HV_TOTAL * HV_FPS)}
+        fps={HV_FPS}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="GigitKuku"
+        component={GigitKuku}
+        durationInFrames={Math.round(GK_TOTAL * GK_FPS)}
+        fps={GK_FPS}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="NiupMakanan"
+        component={NiupMakanan}
+        durationInFrames={Math.round(NM_TOTAL * NM_FPS)}
+        fps={NM_FPS}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="LaparMarah"
+        component={LaparMarah}
+        durationInFrames={Math.round(LM_TOTAL * LM_FPS)}
+        fps={LM_FPS}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="Inflasi"
+        component={Inflasi}
+        durationInFrames={Math.round(IF_TOTAL * IF_FPS)}
+        fps={IF_FPS}
         width={1080}
         height={1920}
       />

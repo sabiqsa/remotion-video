@@ -1,0 +1,14 @@
+{
+  "out": "public/vo/niup-makanan",
+  "module": "src/NiupMakanan/vo.generated.ts",
+  "clips": {
+    "hook": "makanan masih panas, langsung ditiup? eh, tunggu dulu.",
+    "ehem": "dari kechil dilarang, ternyata ada alasannya.",
+    "p1": "pertama, napas kita bawa bakteri dari mulut. studi tiup lilin kue: bakteri di kue naik sampai lima belas kali.",
+    "p2": "kedua, paling bahaya buat bayi. bakteri penyebab gigi berlubang bisa pindah ke makanannya.",
+    "p3": "ketiga, lagi flu atau batuk? perchikan ludah ikut nempel ke makanan.",
+    "twist": "niup memang bikin chepat dingin. tapi sayangnya, kumannya ikut juga.",
+    "tips": "jadi, mending diaduk dulu, disebar di piring, atau sabar tunggu sebentar.",
+    "komen": "kamu tim tiup atau tim sabar? tulis di komen ya."
+  }
+}

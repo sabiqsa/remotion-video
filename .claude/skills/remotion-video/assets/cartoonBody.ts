@@ -4,7 +4,7 @@
 // sehingga ikut semua animasi rig. Wajah bisa diatur per frame lewat `applyFace`.
 
 import * as THREE from "three";
-import { buildHair, buildHeadAccessories, OUTFIT_COLORS, Wardrobe } from "./wardrobe";
+import { buildHair, buildHeadAccessories, DINO_SPIKE, OUTFIT_COLORS, Wardrobe } from "./wardrobe";
 
 export type { Accessory, HairStyle, Outfit, Wardrobe } from "./wardrobe";
 
@@ -55,6 +55,14 @@ export type FaceState = {
   twitchL?: number;
   /** 0..1 kantung mata gelap (kurang tidur) */
   bags?: number;
+  /** 0..1 dua gigi depan besar ala kelinci (menggigit / nyengir lucu) */
+  buck?: number;
+  /** 0..1 meniup "fuuuh": pipi menggembung + bibir monyong bulat kecil */
+  puff?: number;
+  /** 0..1 marah/kesal: alis menukik ke dalam, wajah memerah, tanda urat 💢 di dahi */
+  angry?: number;
+  /** 0..1 syok berat: mata melotot, pupil mengecil, rahang jatuh, alis melonjak */
+  shock?: number;
 };
 
 export type CartoonRig = {
@@ -65,6 +73,10 @@ export type CartoonRig = {
   teeth: THREE.Object3D;
   sweat: THREE.Object3D;
   bags: THREE.MeshStandardMaterial;
+  buck: THREE.Object3D;
+  puffCheeks: THREE.Object3D[];
+  pucker: THREE.Object3D;
+  vein: THREE.Object3D;
   skinMats: THREE.MeshStandardMaterial[];
   lipMats: THREE.MeshStandardMaterial[];
   cheekMats: THREE.MeshStandardMaterial[];
@@ -179,6 +191,47 @@ const buildHead = (c: CartoonColors, w: Wardrobe) => {
   add(new THREE.BoxGeometry(0.15 * K, 0.04 * K, 0.035 * K), mat("#ffffff", { roughness: 0.3 }), [0, 0, 0.004], [1, 1, 1], [0, 0, 0], teeth);
   teeth.visible = false;
 
+  // gigi kelinci: dua gigi depan besar menjuntai dari bibir atas
+  const buck = new THREE.Group();
+  buck.position.set(0, -0.2 * K, 0.43 * K);
+  head.add(buck);
+  const enamel = mat("#ffffff", { roughness: 0.15 });
+  for (const s of [-1, 1]) {
+    const tooth = new THREE.Mesh(new THREE.CapsuleGeometry(0.03 * K, 0.05 * K, 6, 12), enamel);
+    tooth.position.set(s * 0.034 * K, -0.035 * K, 0.012 * K);
+    tooth.scale.set(1, 1, 0.55);
+    buck.add(tooth);
+  }
+  buck.visible = false;
+
+  // tiup: dua gundukan pipi (warna kulit) + bibir monyong (torus kecil + lubang gelap)
+  const puffCheeks = [-1, 1].map((s) => {
+    const g = add(new THREE.SphereGeometry(0.13 * K, 20, 16), skin, [s * 0.23, -0.14, 0.33], [1, 0.85, 0.7]);
+    g.visible = false;
+    return g;
+  });
+  const pucker = new THREE.Group();
+  pucker.position.set(0, -0.19 * K, 0.45 * K);
+  head.add(pucker);
+  add(new THREE.TorusGeometry(0.038 * K, 0.02 * K, 10, 20), lip, [0, 0, 0], [1, 1, 1], [0, 0, 0], pucker);
+  add(new THREE.CircleGeometry(0.03 * K, 16), inner, [0, 0, 0.004], [1, 1, 1], [0, 0, 0], pucker);
+  pucker.visible = false;
+
+  // marah: tanda urat 💢 (empat lengkung merah) di dahi kanan atas
+  const vein = new THREE.Group();
+  vein.position.set(0.24 * K, 0.31 * K, 0.46 * K);
+  vein.rotation.set(-0.3, 0.35, 0);
+  head.add(vein);
+  const veinMat = mat("#e3263b", { roughness: 0.4 });
+  for (let i = 0; i < 4; i++) {
+    const a = (i * Math.PI) / 2 + Math.PI / 4;
+    const arc = new THREE.Mesh(new THREE.TorusGeometry(0.045 * K, 0.014 * K, 8, 16, Math.PI * 0.55), veinMat);
+    arc.position.set(Math.cos(a) * 0.07 * K, Math.sin(a) * 0.07 * K, 0);
+    arc.rotation.z = a + Math.PI - Math.PI * 0.275;
+    vein.add(arc);
+  }
+  vein.visible = false;
+
   // tetes keringat di pelipis
   const sweat = new THREE.Group();
   sweat.position.set(0.33 * K, 0.2 * K, 0.3 * K);
@@ -198,6 +251,10 @@ const buildHead = (c: CartoonColors, w: Wardrobe) => {
       teeth,
       sweat,
       bags,
+      buck,
+      puffCheeks,
+      pucker,
+      vein,
       skinMats: [skin as THREE.MeshStandardMaterial],
       lipMats: [lip as THREE.MeshStandardMaterial, inner as THREE.MeshStandardMaterial],
       cheekMats: [cheek as THREE.MeshStandardMaterial],
@@ -303,6 +360,24 @@ const buildOutfitDetails = (
     attach("spine_03", boxAt(s3.clone().add(v3(-0.1, -0.03, FRONT + 0.01)), [0.08, 0.09, 0.015], main));
     attach("spine_03", boxAt(s3.clone().add(v3(-0.1, 0.0, FRONT + 0.02)), [0.012, 0.09, 0.012], mat("#2f7cf6")));
   }
+  if (outfit === "chef") {
+    // baju koki: dua baris kancing, sisi depan bertumpuk, saputangan leher merah
+    attach("spine_03", boxAt(s3.clone().add(v3(0.03, -0.02, FRONT + 0.006)), [0.012, 0.36, 0.012], mat(shade(main, 0.88))));
+    for (let i = 0; i < 3; i++) {
+      for (const s of [-1, 1]) {
+        const p = s3.clone().lerp(s1, 0.05 + i * 0.32).add(v3(s * 0.06 + 0.015, 0.04, FRONT + 0.015));
+        attach(i < 2 ? "spine_03" : "spine_01", sphereAt(p, 0.014, mat("#2a2a30", { roughness: 0.3 })));
+      }
+    }
+    const scarf = new THREE.Mesh(new THREE.TorusGeometry(0.085, 0.03, 12, 28), accent);
+    scarf.position.copy(neck.clone().add(v3(0, -0.02, 0.01)));
+    scarf.rotation.x = Math.PI / 2;
+    attach("spine_03", scarf);
+    const knot = new THREE.Mesh(new THREE.ConeGeometry(0.045, 0.09, 4), accent);
+    knot.position.copy(neck.clone().add(v3(0, -0.1, 0.17)));
+    knot.rotation.set(Math.PI + 0.3, Math.PI / 4, 0);
+    attach("spine_03", knot);
+  }
   if (outfit === "bowtie") {
     // kemeja lengan pendek: kerah putih kecil + dasi kupu-kupu merah di bawah dagu
     for (const s of [-1, 1]) {
@@ -333,6 +408,41 @@ const buildOutfitDetails = (
     const knot = sphereAt(knotAt.clone().add(v3(0, 0, 0.01)), 0.028, red);
     knot.scale.set(1, 1.15, 0.8);
     attach("spine_03", knot);
+  }
+};
+
+/** Piyama dino: perut krem, duri oranye di punggung, ekor gemuk yang menjulur ke belakang. */
+const buildDino = (P: Pos, attach: Attach, accent: THREE.Material) => {
+  const s3 = P("spine_03");
+  const s1 = P("spine_01");
+  const neck = P("neck_01");
+  const pelvis = P("pelvis");
+  const belly = sphereAt(pelvis.clone().lerp(s3, 0.45).add(v3(0, 0, 0.105)), 0.13, accent);
+  belly.scale.set(1.05, 1.35, 0.55);
+  attach("spine_01", belly);
+  const spike = mat(DINO_SPIKE, { roughness: 0.5 });
+  [neck.clone().lerp(s3, 0.35), s3.clone(), s3.clone().lerp(s1, 0.5), s1.clone()].forEach((p, i) => {
+    const c = new THREE.Mesh(new THREE.ConeGeometry(0.045, 0.11 - i * 0.012, 14), spike);
+    c.position.copy(p.add(v3(0, 0, -0.19)));
+    c.rotation.x = -1.25;
+    c.scale.set(0.55, 1, 1);
+    attach(i < 2 ? "spine_03" : "spine_01", c);
+  });
+  const green = mat(OUTFIT_COLORS.dino.main, { roughness: 0.6 });
+  const t0 = pelvis.clone().add(v3(0, -0.02, -0.14));
+  const t1 = pelvis.clone().add(v3(0, -0.1, -0.36));
+  const t2 = pelvis.clone().add(v3(0, -0.13, -0.52));
+  attach("pelvis", capsuleBetween(t0, t1, 0.085, green));
+  attach("pelvis", capsuleBetween(t1, t2, 0.055, green));
+  const tip = new THREE.Mesh(new THREE.ConeGeometry(0.05, 0.12, 14), green);
+  tip.position.copy(t2.clone().add(v3(0, -0.01, -0.06)));
+  tip.rotation.x = -Math.PI / 2 - 0.2;
+  attach("pelvis", tip);
+  for (const k of [0.3, 0.65]) {
+    const c = new THREE.Mesh(new THREE.ConeGeometry(0.035, 0.08, 12), spike);
+    c.position.copy(t0.clone().lerp(t2, k).add(v3(0, 0.07 - k * 0.03, 0)));
+    c.scale.set(0.55, 1, 1);
+    attach("pelvis", c);
   }
 };
 
@@ -377,7 +487,7 @@ export const buildCartoonBody = (
   const skin = mat(colors.skin, { roughness: 0.7 });
   const shirt = mat(shirtColor, { roughness: 0.55 });
   const accent = mat(oc.accent, { roughness: 0.55 });
-  const longSleeves = outfit === "hoodie" || outfit === "shirt" || outfit === "jacket" || outfit === "doctor";
+  const longSleeves = outfit === "hoodie" || outfit === "shirt" || outfit === "jacket" || outfit === "doctor" || outfit === "dino" || outfit === "chef";
   const pants = mat(colors.pants, { roughness: 0.7 });
   const shoes = mat(colors.shoes, { roughness: 0.5 });
 
@@ -395,8 +505,9 @@ export const buildCartoonBody = (
   const collar = new THREE.Mesh(new THREE.TorusGeometry(0.075, 0.022, 10, 24), outfit === "tee" ? mat(colors.collar) : accent);
   collar.position.copy(P("neck_01"));
   collar.rotation.x = Math.PI / 2;
-  if (outfit !== "hoodie") attach("spine_03", collar);
+  if (outfit !== "hoodie" && outfit !== "dino" && outfit !== "chef") attach("spine_03", collar);
   buildOutfitDetails(outfit, P, attach, shirt, accent);
+  if (outfit === "dino") buildDino(P, attach, accent);
   if ((wardrobe.accessories ?? []).includes("stethoscope")) buildStethoscope(P, attach);
   attach("neck_01", capsuleBetween(P("neck_01"), P("Head"), 0.05, skin));
 
@@ -442,6 +553,7 @@ const PALE_SKIN = new THREE.Color("#ebdcd0");
 const LIP = new THREE.Color("#7a2e2e");
 const LIP_PALE = new THREE.Color("#b99a93");
 const INNER = new THREE.Color("#5a1f22");
+const ANGRY_SKIN = new THREE.Color("#ef7a62");
 const INNER_PALE = new THREE.Color("#8d6a66");
 const c01 = (v: number | undefined, d: number) => Math.max(0, Math.min(1, v ?? d));
 
@@ -461,11 +573,20 @@ export const applyFace = (rig: CartoonRig, face: FaceState = {}) => {
   const sweat = c01(face.sweat, 0);
   const twitchL = c01(face.twitchL, 0);
   const bags = c01(face.bags, 0);
+  const buck = c01(face.buck, 0);
+  const puff = c01(face.puff, 0);
+  const angry = c01(face.angry, 0);
+  const shock = c01(face.shock, 0);
 
   // mata: kesakitan → dipicingkan
   rig.eyes.forEach((e, i) => {
     const tw = i === 1 ? twitchL : 0;
-    e.scale.y = Math.max(0.06, eyeOpen * (1 - pain * 0.75) * (1 - tw * 0.7));
+    const big = 1 + shock * 0.3;
+    e.scale.x = big;
+    e.scale.y = Math.max(0.06, eyeOpen * (1 - pain * 0.75) * (1 - tw * 0.7)) * big;
+    // pupil (anak ke-2 grup mata) mengecil saat syok
+    const pupil = e.children[1];
+    if (pupil) pupil.scale.setScalar(1 - shock * 0.55);
   });
   rig.bags.opacity = bags * 0.75;
 
@@ -473,21 +594,30 @@ export const applyFace = (rig: CartoonRig, face: FaceState = {}) => {
   for (const b of rig.brows) {
     const s = b.userData.side as number;
     const tw = s > 0 ? twitchL : 0;
-    b.rotation.z = s * (-0.1 - sleepy * 0.25 - sad * 0.5 + pain * 0.3 + tw * 0.25);
-    b.position.y = (0.2 - sleepy * 0.03 + surprise * 0.06 + sad * 0.015 - tw * 0.04) * K;
+    b.rotation.z = s * (-0.1 - sleepy * 0.25 - sad * 0.5 + pain * 0.3 + tw * 0.25 + angry * 0.6);
+    b.position.y = (0.2 - sleepy * 0.03 + surprise * 0.06 + shock * 0.07 + sad * 0.015 - tw * 0.04 - angry * 0.035) * K;
   }
 
   // warna: pucat & merona
-  for (const m of rig.skinMats) m.color.copy(rig.baseSkin).lerp(PALE_SKIN, pale * 0.8);
+  for (const m of rig.skinMats) m.color.copy(rig.baseSkin).lerp(PALE_SKIN, pale * 0.8).lerp(ANGRY_SKIN, angry * 0.5);
   rig.lipMats[0].color.copy(LIP).lerp(LIP_PALE, pale);
   rig.lipMats[1].color.copy(INNER).lerp(INNER_PALE, pale);
-  for (const m of rig.cheekMats) m.opacity = Math.min(1, 0.7 * (1 - pale) + blush * 0.9);
+  for (const m of rig.cheekMats) m.opacity = Math.min(1, 0.7 * (1 - pale) + blush * 0.9 + angry * 0.3);
+  rig.vein.visible = angry > 0.3;
+  rig.vein.scale.setScalar(Math.max(0.01, (angry - 0.3) / 0.7));
 
   // mulut: prioritas meringis > menguap/O > senyum/cemberut
-  const mouthOpen = Math.max(yawn, open);
+  const mouthOpen = Math.max(yawn, open, shock);
   rig.teeth.visible = pain > 0.3;
   rig.yawnMouth.visible = !rig.teeth.visible && mouthOpen > 0.15;
   rig.yawnMouth.scale.set(yawn >= open ? 0.8 : 0.55 + 0.15 * open, yawn >= open ? 0.5 + yawn : 0.35 + 0.7 * open, 0.4);
+  if (shock > open && shock > yawn) {
+    // rahang jatuh: mulut lonjong tinggi, sedikit turun
+    rig.yawnMouth.scale.set(0.6 + 0.1 * shock, 0.4 + 1.0 * shock, 0.4);
+    rig.yawnMouth.position.y = (-0.2 - 0.03 * shock) * K;
+  } else {
+    rig.yawnMouth.position.y = -0.2 * K;
+  }
   rig.smile.visible = !rig.teeth.visible && !rig.yawnMouth.visible;
   const curve = smile - frown; // >0 senyum, <0 cemberut
   if (curve >= 0) {
@@ -498,6 +628,23 @@ export const applyFace = (rig: CartoonRig, face: FaceState = {}) => {
     rig.smile.position.y = -0.23 * K;
   }
   rig.smile.scale.set(1, 0.5 + Math.abs(curve) * 0.8, 1);
+
+  // tiup menggantikan mulut lain
+  const puffing = puff > 0.05;
+  for (const c of rig.puffCheeks) {
+    c.visible = puffing;
+    c.scale.set(0.4 + 0.6 * puff, 0.35 + 0.5 * puff, 0.3 + 0.4 * puff);
+  }
+  rig.pucker.visible = puffing;
+  rig.pucker.scale.setScalar(Math.max(0.01, 0.6 + 0.4 * puff));
+  if (puffing) {
+    rig.smile.visible = false;
+    rig.yawnMouth.visible = false;
+    rig.teeth.visible = false;
+  }
+
+  rig.buck.visible = buck > 0.03;
+  rig.buck.scale.set(1, Math.max(0.01, buck), 1);
 
   rig.sweat.visible = sweat > 0.05;
   rig.sweat.scale.setScalar(Math.max(0.01, sweat));

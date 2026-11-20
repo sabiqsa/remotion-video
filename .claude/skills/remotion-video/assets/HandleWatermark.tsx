@@ -1,6 +1,7 @@
 // Watermark anti re-upload: ikon logo + "@day.one.eight" yang MELOMPAT ke posisi
 // aman lain setiap kali scene berganti (hard cut), lalu diam. Posisi yang
-// berganti-ganti membuat watermark sulit di-crop/blur sekali jalan.
+// berganti-ganti membuat watermark sulit di-crop/blur sekali jalan. Default memakai pill gelap
+// transparan di belakangnya supaya tetap terbaca di latar terang (dinding krem, langit siang).
 
 import React from "react";
 import { Img, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
@@ -13,14 +14,18 @@ export const DEFAULT_WATERMARK_SPOTS: WatermarkSpot[] = [
   { left: 90, top: 870 },
   { right: 160, top: 1250 },
   { left: 90, top: 1460 },
+  { right: 160, top: 1000 },
 ];
 
 export const HandleWatermark: React.FC<{
   /** detik-detik pergantian scene; watermark pindah di tiap titik ini */
   cuts: number[];
   spots?: WatermarkSpot[];
+  /** default 0.75 dengan pill, 0.4 tanpa pill */
   opacity?: number;
-}> = ({ cuts, spots = DEFAULT_WATERMARK_SPOTS, opacity = 0.4 }) => {
+  /** pill gelap transparan di belakang logo + handle (default: aktif) */
+  pill?: boolean;
+}> = ({ cuts, spots = DEFAULT_WATERMARK_SPOTS, opacity, pill = true }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const t = frame / fps;
@@ -37,7 +42,8 @@ export const HandleWatermark: React.FC<{
         display: "flex",
         alignItems: "center",
         gap: 10,
-        opacity,
+        opacity: opacity ?? (pill ? 0.75 : 0.4),
+        ...(pill ? { background: "rgba(10,12,28,0.5)", padding: "7px 18px 7px 9px", borderRadius: 999 } : {}),
         fontFamily: BRAND_FONT,
         fontWeight: 600,
         fontSize: 30,

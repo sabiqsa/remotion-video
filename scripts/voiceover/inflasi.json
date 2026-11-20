@@ -1,0 +1,14 @@
+{
+  "out": "public/vo/inflasi",
+  "module": "src/Inflasi/vo.generated.ts",
+  "clips": {
+    "hook": "kenapa ya, harga barang naik terus? padahal gaji segitu-segitu aja.",
+    "ehem": "ini namanya inflasi. penyebabnya ada tiga.",
+    "p1": "pertama, permintaan naik. banyak orang mau bli, tapi barangnya terbatas, harganya ikut naik.",
+    "p2": "kedua, biaya produksi naik. bensin, bahan baku, dan upah naik, pabrik ikut menaikkan harga jual.",
+    "p3": "ketiga, uang yang beredar bertambah lebih chepat dari jumlah barang. uangnya makin banyak, nilainya jadi turun.",
+    "twist": "jadi, yang turun itu nilai uangmu. inflasi tiga persen setahun, sepuluh tahun lagi harga naik sekitar sepertiga.",
+    "tips": "belanja sesuai kebutuhan, simpan uang di tempat yang hasilnya di atas inflasi, dan tambah skill.",
+    "komen": "dulu waktu kecil, uang jajan kamu berapa? tulis di komen ya."
+  }
+}

@@ -27,6 +27,8 @@ const OUTFIT_LABEL: Record<Outfit, string> = {
   jacket: "jaket",
   doctor: "jas dokter",
   bowtie: "dasi kupu-kupu",
+  dino: "piyama dino",
+  chef: "baju koki",
 };
 const ACC_LABEL: Record<Accessory, string> = {
   glasses_round: "kacamata bulat",
@@ -36,6 +38,8 @@ const ACC_LABEL: Record<Accessory, string> = {
   mask: "masker",
   headphones: "headphone",
   stethoscope: "stetoskop",
+  dino_hood: "tudung dino",
+  chef_hat: "topi koki",
 };
 
 const OrthoCam: React.FC<{ y: number; zoom: number }> = ({ y, zoom }) => {

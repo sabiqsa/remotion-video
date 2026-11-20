@@ -247,11 +247,173 @@ def twitch():
     return out
 
 
+def glint():
+    """kilau kacamata 'ting~': nada tinggi 3.1 kHz + 4.7 kHz dengan ekor berkilau."""
+    n = int(SR * 0.55)
+    out = []
+    for i in range(n):
+        t = i / SR
+        e = env(t, 0.002, 0.18)
+        shimmer = 1 + 0.25 * math.sin(2 * math.pi * 18 * t)
+        out.append((math.sin(2 * math.pi * 3136 * t) + 0.5 * math.sin(2 * math.pi * 4699 * t)) * e * shimmer * 0.6)
+    return out
+
+
+def rocket():
+    """roket 'fwoooosh': noise rendah naik ke terang selama ±0.9 dtk, lalu hilang."""
+    n = int(SR * 0.95)
+    lo = lp_noise(n, 0.08, 77)
+    hi = lp_noise(n, 0.5, 78)
+    out = []
+    for i in range(n):
+        t = i / SR
+        u = t / 0.95
+        mix = min(1.0, u * 1.4)
+        g = min(1.0, t / 0.05) * (1 - u) ** 1.5
+        out.append((lo[i] * 4 * (1 - mix) + hi[i] * 1.6 * mix) * g)
+    return out
+
+
+def crunch():
+    """'kriuk' keripik/kuku: tiga retakan noise terang berurutan dengan klik tajam."""
+    n = int(SR * 0.5)
+    out = [0.0] * n
+    hi = lp_noise(n, 0.85, 91)
+    for k, at in enumerate([0.0, 0.07, 0.16]):
+        a = int(at * SR)
+        for i in range(int(SR * 0.06)):
+            if a + i < n:
+                t = i / SR
+                out[a + i] += hi[a + i] * 2.2 * env(t, 0.001, 0.012) * (1 - 0.2 * k)
+    return out
+
+
+def squish():
+    """'squish' squishy diremas: gelembung rendah turun + desis basah pendek."""
+    n = int(SR * 0.5)
+    noise = lp_noise(n, 0.25, 92)
+    out, ph = [], 0.0
+    for i in range(n):
+        t = i / SR
+        f = 260 - 160 * min(1.0, t / 0.25)
+        ph += 2 * math.pi * f / SR
+        tone = math.sin(ph) * env(t, 0.01, 0.12)
+        wet = noise[i] * 1.5 * env(t, 0.005, 0.08)
+        out.append(tone * 0.8 + wet)
+    return out
+
+
+def blow():
+    """tiupan 'fuuuh': noise napas (pita 300–2.5 kHz) membengkak 0.08 dtk, bertahan, lalu reda ±0.75 dtk."""
+    n = int(SR * 0.8)
+    a = lp_noise(n, 0.35, 101)
+    b = lp_noise(n, 0.06, 102)
+    out = []
+    for i in range(n):
+        t = i / SR
+        g = min(1.0, t / 0.08) * (1 - min(1.0, max(0.0, t - 0.35) / 0.45)) ** 1.6
+        out.append((a[i] - b[i] * 1.2) * g)
+    return out
+
+
+def sneeze():
+    """bersin 'ha-CHI!': tarikan napas naik (sinus 300→520 Hz + desis) lalu ledakan desis terang."""
+    n = int(SR * 0.75)
+    hi = lp_noise(n, 0.7, 111)
+    soft = lp_noise(n, 0.2, 112)
+    out, ph = [], 0.0
+    for i in range(n):
+        t = i / SR
+        if t < 0.32:
+            f = 300 + 220 * (t / 0.32)
+            ph += 2 * math.pi * f / SR
+            g = min(1.0, t / 0.05) * (0.35 + 0.65 * t / 0.32)
+            out.append((math.sin(ph) * 0.35 + soft[i] * 0.9) * g * 0.55)
+        else:
+            u = t - 0.36
+            out.append(hi[i] * 2.0 * env(max(0.0, u), 0.004, 0.09) if u >= 0 else 0.0)
+    return out
+
+
+def steam():
+    """desis uap halus ±0.9 dtk (noise terang, masuk-keluar lembut)."""
+    n = int(SR * 0.9)
+    noise = lp_noise(n, 0.9, 121)
+    return [noise[i] * math.sin(math.pi * i / n) ** 1.5 for i in range(n)]
+
+
+def growl():
+    """perut keroncongan 'krucuk~': dengung rendah 70–130 Hz bergelombang + gelembung pendek, ±1.1 dtk."""
+    n = int(SR * 1.1)
+    gurgle = lp_noise(n, 0.02, 131)
+    out, ph = [], 0.0
+    for i in range(n):
+        t = i / SR
+        f = 85 + 35 * math.sin(2 * math.pi * 3.2 * t) + 25 * t
+        ph += 2 * math.pi * f / SR
+        bub = 0.5 + 0.5 * math.sin(2 * math.pi * 11 * t + 2 * math.sin(2 * math.pi * 2.3 * t))
+        g = min(1.0, t / 0.08) * (1 - min(1.0, max(0.0, t - 0.7) / 0.4)) ** 1.5
+        tone = math.sin(ph) + 0.45 * math.sin(2 * ph) + 0.2 * math.sin(3 * ph)
+        out.append((tone * (0.4 + 0.6 * bub) + gurgle[i] * 3) * g)
+    return out
+
+
+def huff():
+    """dengus kesal 'hmph!': hembusan hidung pendek (desis rendah + dengung 160 Hz), ±0.35 dtk."""
+    n = int(SR * 0.4)
+    a = lp_noise(n, 0.25, 141)
+    out, ph = [], 0.0
+    for i in range(n):
+        t = i / SR
+        ph += 2 * math.pi * (170 - 60 * t) / SR
+        g = env(t, 0.012, 0.11)
+        out.append((a[i] * 1.6 + math.sin(ph) * 0.35) * g)
+    return out
+
+
+def sting():
+    """hentakan syok 'DUN!': sub 55 Hz + akor rendah disonan (A1/D#2) dengan desis tabrakan, ekor ±1.0 dtk."""
+    n = int(SR * 1.1)
+    a = lp_noise(n, 0.5, 151)
+    out = []
+    for i in range(n):
+        t = i / SR
+        g = env(t, 0.006, 0.45)
+        tone = (math.sin(2 * math.pi * 55 * t) * 0.9 + math.sin(2 * math.pi * 110 * t) * 0.45
+                + math.sin(2 * math.pi * 77.8 * t) * 0.4 + math.sin(2 * math.pi * 155.6 * t) * 0.2)
+        hit = a[i] * env(t, 0.002, 0.06) * 1.2
+        out.append(tone * g * 0.7 + hit)
+    return out
+
+
+def kaching():
+    """mesin kasir 'ka-ching!': klik mekanis + dua nada bel terang (E6 → B6) dengan ekor berkilau."""
+    n = int(SR * 0.8)
+    a = lp_noise(n, 0.9, 161)
+    out = []
+    for i in range(n):
+        t = i / SR
+        click = a[i] * env(t, 0.001, 0.012) * 1.4 + a[i] * env(max(0.0, t - 0.06), 0.001, 0.015) * (t > 0.06) * 1.0
+        b = 0.0
+        if t > 0.1:
+            u = t - 0.1
+            for f, w in ((1318.5, 0.6), (1975.5, 0.5), (2637.0, 0.25), (3951.0, 0.15)):
+                b += math.sin(2 * math.pi * f * u) * w
+            b *= env(u, 0.003, 0.22)
+        out.append(click + b * 0.55)
+    return out
+
+
 if __name__ == "__main__":
     for name, fn in [("whoosh", whoosh), ("thud", thud), ("boing", boing), ("burp", burp),
                      ("srek", srek), ("tick", tick), ("ding", ding), ("pop", pop), ("slurp", slurp),
                      ("rain", rain), ("thunder", thunder), ("drip", drip),
-                     ("coin", coin), ("buzz", buzz), ("twitch", twitch)]:
+                     ("coin", coin), ("buzz", buzz), ("twitch", twitch),
+                     ("glint", glint), ("rocket", rocket),
+                     ("crunch", crunch), ("squish", squish),
+                     ("blow", blow), ("sneeze", sneeze), ("steam", steam),
+                     ("growl", growl), ("huff", huff),
+                     ("sting", sting), ("kaching", kaching)]:
         # python3 scripts/make_sfx_comedy.py rain thunder  → hanya file itu
         if len(sys.argv) > 1 and name not in sys.argv[1:]:
             continue
